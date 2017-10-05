@@ -5,9 +5,44 @@
       <title>dashboard</title>
       <meta name="description" content="Dashboard of Liverweb with overview of patients, cohorts and respective functions">
       <meta name="author" content="Martin Wagner">
+      <link rel="stylesheet" type="text/css" href="css/dashboard.css"/>
   </head>
   <body>
           <!-- this is comment-->
-          <p>Hello Worlf</p>
+          <div class="dashboard-box" id="Headline">
+              div1
+              <div class="box2nd" id="LiverWeb">
+                  LiverWeb
+              </div>
+          </div>
+          <p>Hello World</p>
+
+          <div class="tab left" id="MainTab-Left">
+            <button class="tablinks" onclick="openFeature(event,'Patient')">Patient</button>
+            <button class="tablinks" onclick="openFeature(event,'Kohorte')">Kohorte</button>
+          </div>
+
+          <div class="tab right" id="MainTab-Right">
+            <button class="tablinks right" onclick="openFeature(event,'Verlauf')">Verlauf</button>
+            <button class="tablinks right" onclick="openFeature(event,'Labor)">Labor</button>
+            <button class="tablinks right" onclick="openFeature(event,'Decision-Support')">Decision-Support</button>
+            <button class="tablinks right" onclick="openFeature(event,'Upload')">Upload</button>
+            <button class="tablinks" onclick="openFeature(event,'Token')">Token</button>
+          </div>
+
+          <div id="Patient" class="tabcontent left">
+            <h3>Patientenliste</h3>
+            <p> Mustermann, Max *01.01.1970</p>
+          </div>
+
+          <div id="Kohorte" class="tabcontent left">
+            <h3>Kohortenauswahl</h3>
+            <p>Mayer, Erik *01.01.1960</p>
+            <p>Muster, Paul *01.01.1950</p>
+          </div>
+
+          <div id="Verlauf" class="tabcontent right">
+            <h3>Verlauf</h3>
+  <script src="js/openFeature.js"></script>
   </body>
 </html>
