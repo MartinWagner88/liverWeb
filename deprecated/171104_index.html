@@ -8,98 +8,10 @@
     <title>LiverWeb - Dashboard</title>
 
     <!--Bootstrap CSS -->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
   <body>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">LiverWeb</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li><a href="#">Patient</a></li>
-        <li><a href="#">Kohorte</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sign-In<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Log-Out</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span>
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Einstellung 1</a></li>
-            <li><a href="#">Einstellung 2</a></li>
-            <li><a href="#">Einstellung 3</a></li>
-          </ul>
-        </li>
-      <a href="#"><img src="pictures/UK-Erlangen-Logo.jpg" style="height:40pt "></a>
-      </ul>
-    </div>
-  </nav>
 
-  <form class="form-inline" action="index.html" method="post">
-    <div class="form-group">
-      <label for="nachname">Nachname:</label>
-      <input type="text" class="form-control" id="nachname" placeholder="Nachname">
-    </div>
-    <div class="form-group">
-      <label for="vorname">Vorname:</label>
-      <input type="text" class="form-control" id="vorname" placeholder="Vorname">
-    </div>
-    <div class="form-group">
-      <label for="geburtsdatum">Geburtsdatum:</label>
-      <input type="date" class="form-control" id="geburtstag" max="1900-01-01" placeholder="Geburtsdatum">
-    </div>
-    <div class="form-group">
-      <label for="bericht-datum">Vorstellungsdatum:</label>
-      <input type="date" class="form-control" id="bericht-datum" placeholder="Vorstellungsdatum">
-    </div>
-    <button type="submit" class="btn btn-default">Suchen</button>
-    <button type="reset" class="btn btn-default ">Reset</button>
-  </form>
-
-<div class="col-xs-12" style="height:10px;"></div>
-
- <ul class="nav nav-tabs nav-justified">
-   <li><a data-toggle="tab" href="#Verlauf-Tab">Verlauf</a></li>
-   <li><a data-toggle="tab" href="#Labor-Tab">Labor</a></li>
-   <li><a data-toggle="tab" href="#Decision-Support-Tab">Decision-Support</a></li>
-   <li><a data-toggle="tab" href="#Upload-Tab">Upload</a></li>
-   <li><a data-toggle="tab" href="#Token-Tab">Token</a></li>
- </ul>
-
- <div class="tab-content">
-   <div id="Verlauf-Tab" class="tab-pane fade in active">
-     <h3>Verlauf</h3>
-     <p>Some Verlauf</p>
-   </div>
-   <div id="Labor-Tab" class="tab-pane fade">
-     <h3>Labor</h3>
-     <p>Some Labor</p>
-   </div>
-   <div id="Decision-Support-Tab" class="tab-pane fade">
-     <h3>Decision-Support</h3>
-     <p>Some Decision-Support</p>
-   </div>
-   <div id="Upload-Tab" class="tab-pane fade">
-     <h3>Upload</h3>
-     <p>Some Upload</p>
-   </div>
-   <div id="Token-Tab" class="tab-pane fade">
-     <h3>Token</h3>
-     <p>Some Token.</p>
-   </div>
-
- </div>
-
-<!--
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-8" style="background-color:green;">
@@ -109,9 +21,7 @@
         Dr. Marcel Vetter
       </div>
       <div class="col-md-1" style="background-color:yellow" >
-       <img src="pictures/UK-Erlangen-Logo.jpg" class="img-rounded img-responsive" alt="UK Erlangen" width="100%">
-
-
+        <img src="pictures/UK-Erlangen-Logo.jpg" class="img-rounded img-responsive" alt="UK Erlangen" width="100%">
       </div>
     </div>
     <div class="row">
@@ -218,10 +128,10 @@
 
     </div>
   </div>
--->
+
   <!-- Bootstrap javascript. jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   </body>
 </html>
