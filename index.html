@@ -12,9 +12,13 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
+    <!--Java-Script-Dateien -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/javascript1.js"></script>
+    </script>
   </head>
   <body>
-  <nav class="navbar navbar-inverse">
+  <nav class="navbar navbar-inverse navbar-fixes-top">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">LiverWeb</a>
@@ -39,7 +43,7 @@
             <li><a href="#">Einstellung 3</a></li>
           </ul>
         </li>
-      <a href="#"><img src="pictures/UK-Erlangen-Logo.jpg" style="height:40pt "></a>
+      <a href="#"><img src="pictures/UK-Erlangen-Logo.jpg" alt="UK-Erlangen" style="height:40pt "></a>
       </ul>
     </div>
   </nav>
@@ -61,9 +65,90 @@
       <label for="bericht-datum">Vorstellungsdatum:</label>
       <input type="date" class="form-control" id="bericht-datum" placeholder="Vorstellungsdatum">
     </div>
-    <button type="submit" class="btn btn-default">Suchen</button>
+    <button id="patsuchsubmit" type="submit" class="btn btn-default">Suchen</button>
     <button type="reset" class="btn btn-default ">Reset</button>
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#newPatientModal">Neuer Patient</button>
   </form>
+
+  <!-- Modal newPatientModal-->
+  <div id="newPatientModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Neuen Patienten anlegen</h4>
+        </div>
+        <div class="modal-body">
+          <form class="" action="index.html" method="post">
+            <div class="form-group">
+              <label for="nachname">Nachname:</label>
+              <input type="text" class="form-control" id="nachname" placeholder="Nachname">
+            </div>
+            <div class="form-group">
+              <label for="vorname">Vorname:</label>
+              <input type="text" class="form-control" id="vorname" placeholder="Vorname">
+            </div>
+            <div class="form-group">
+              <label for="geburtsdatum">Geburtsdatum:</label>
+              <input type="date" class="form-control" id="geburtstag" max="1900-01-01" placeholder="Geburtsdatum">
+            </div>
+            <div class="form-group">
+              <label for="diagnose">Diagnose:</label>
+              <input type="text" class="form-control" id="diagnose" placeholder="Diagnose">
+            </div>
+            <div class="form-group">
+              <label for="geschlecht">Geschlecht:</label>
+              <br>
+              <label class="radio-inline"><input type="radio" name="geschlecht">männlich</label>
+              <label class="radio-inline"><input type="radio" name="geschlecht">weiblich</label>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Bestätigen</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Schließen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table id="pattabelle" class="table-hover table-responsive">
+    <thead>
+      <tr>
+        <th>Nachname</th>
+        <th>Vorname</th>
+        <th>Geburtsdatum</th>
+        <th>m/w</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Mustermann</td>
+        <td>Max</td>
+        <td>01.01.1970</td>
+        <td>m</td>
+      </tr>
+      <tr>
+        <td>Mayer</td>
+        <td>Erik</td>
+        <td>01.01.1960</td>
+        <td>m</td>
+      </tr>
+      <tr>
+        <td>Muster</td>
+        <td>Paul</td>
+        <td>01.01.1950</td>
+        <td>m</td>
+      </tr>
+      <tr>
+        <td>Musterfrau</td>
+        <td>Maria</td>
+        <td>01.01.1990</td>
+        <td>w</td>
+      </tr>
+    </tbody>
+  </table>
+
 
 <div class="col-xs-12" style="height:10px;"></div>
 
@@ -77,24 +162,19 @@
 
  <div class="tab-content">
    <div id="Verlauf-Tab" class="tab-pane fade in active">
-     <h3>Verlauf</h3>
-     <p>Some Verlauf</p>
+     <iframe src="patient_Verlauf.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
    <div id="Labor-Tab" class="tab-pane fade">
-     <h3>Labor</h3>
-     <p>Some Labor</p>
+     <iframe src="patient_Labor.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
    <div id="Decision-Support-Tab" class="tab-pane fade">
-     <h3>Decision-Support</h3>
-     <p>Some Decision-Support</p>
+     <iframe src="patient_Decision-Support.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
    <div id="Upload-Tab" class="tab-pane fade">
-     <h3>Upload</h3>
-     <p>Some Upload</p>
+     <iframe src="patient_Upload.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
    <div id="Token-Tab" class="tab-pane fade">
-     <h3>Token</h3>
-     <p>Some Token.</p>
+     <iframe src="patient_Token.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
 
  </div>
