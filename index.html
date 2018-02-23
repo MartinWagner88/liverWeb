@@ -18,6 +18,8 @@
     </script>
   </head>
   <body>
+
+  <!--Main Navigation Bar-->
   <nav class="navbar navbar-inverse navbar-fixes-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -48,22 +50,23 @@
     </div>
   </nav>
 
-  <form class="form-inline" action="index.html" method="post">
+  <!--Inline Form to search for or add Patients -->
+  <form class="form-inline" action="searchPatients.php" method="post">
     <div class="form-group">
       <label for="nachname">Nachname:</label>
-      <input type="text" class="form-control" id="nachname" placeholder="Nachname">
+      <input type="text" class="form-control" id="nachname" name="nachname" placeholder="Nachname">
     </div>
     <div class="form-group">
       <label for="vorname">Vorname:</label>
-      <input type="text" class="form-control" id="vorname" placeholder="Vorname">
+      <input type="text" class="form-control" id="vorname" name="vorname" placeholder="Vorname">
     </div>
     <div class="form-group">
       <label for="geburtsdatum">Geburtsdatum:</label>
-      <input type="date" class="form-control" id="geburtstag" max="1900-01-01" placeholder="Geburtsdatum">
+      <input type="date" class="form-control" id="geburtsdatum" name="geburtsdatum" min="1900-01-01" placeholder="Geburtsdatum">
     </div>
     <div class="form-group">
       <label for="bericht-datum">Vorstellungsdatum:</label>
-      <input type="date" class="form-control" id="bericht-datum" placeholder="Vorstellungsdatum">
+      <input type="date" class="form-control" id="bericht-datum" name="bericht-datum" placeholder="Vorstellungsdatum">
     </div>
     <button id="patsuchsubmit" type="submit" class="btn btn-default">Suchen</button>
     <button type="reset" class="btn btn-default ">Reset</button>
@@ -79,28 +82,28 @@
           <h4 class="modal-title">Neuen Patienten anlegen</h4>
         </div>
         <div class="modal-body">
-          <form class="" action="index.html" method="post">
+          <form class="" action="newPatient.php" method="post">
             <div class="form-group">
               <label for="nachname">Nachname:</label>
-              <input type="text" class="form-control" id="nachname" placeholder="Nachname">
+              <input type="text" class="form-control" id="nachname" name="nachname" placeholder="Nachname">
             </div>
             <div class="form-group">
               <label for="vorname">Vorname:</label>
-              <input type="text" class="form-control" id="vorname" placeholder="Vorname">
+              <input type="text" class="form-control" id="vorname" name="vorname" placeholder="Vorname">
             </div>
             <div class="form-group">
               <label for="geburtsdatum">Geburtsdatum:</label>
-              <input type="date" class="form-control" id="geburtstag" max="1900-01-01" placeholder="Geburtsdatum">
+              <input type="date" class="form-control" id="geburtsdatum" name="geburtsdatum" min="1900-01-01" placeholder="Geburtsdatum">
             </div>
             <div class="form-group">
               <label for="diagnose">Diagnose:</label>
-              <input type="text" class="form-control" id="diagnose" placeholder="Diagnose">
+              <input type="text" class="form-control" id="diagnose" name="diagnose" placeholder="Diagnose">
             </div>
             <div class="form-group">
               <label for="geschlecht">Geschlecht:</label>
               <br>
-              <label class="radio-inline"><input type="radio" name="geschlecht">männlich</label>
-              <label class="radio-inline"><input type="radio" name="geschlecht">weiblich</label>
+              <label class="radio-inline"><input type="radio" id="geschlecht-m" name="geschlecht" value="m" checked>männlich</label>
+              <label class="radio-inline"><input type="radio" id="geschlecht-w" name="geschlecht" value="w">weiblich</label>
             </div>
             <button type="submit" class="btn btn-success btn-block">Bestätigen</button>
           </form>
