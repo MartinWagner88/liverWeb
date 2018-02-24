@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['user_session'])){
+	header("Location: index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -39,6 +46,6 @@ $zaehler++;
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
-<script src="js/Diagramm.js"></script> 
+<script src="js/Diagramm.js"></script>
 </body>
 </html>

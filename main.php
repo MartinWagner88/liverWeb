@@ -121,16 +121,15 @@ if(!isset($_SESSION['user_session'])){
     </div>
   </div>
 
-  <div class="container-fluid table-responsive">
-    <table id="patTable" class="table-hover">
+  <div class="table-responsive" style="width:90%">
+    <table id="patTable" class="table table-hover">
       <thead>
         <tr>
-          <th> </th>
-          <th>idStammdaten</th>
           <th>Nachname</th>
           <th>Vorname</th>
           <th>Geburtsdatum</th>
           <th>Geschlecht</th>
+					<th>Gewählter Patient</th>
         </tr>
       </thead>
       <tbody id="patTable_Body">
@@ -150,10 +149,10 @@ if(!isset($_SESSION['user_session'])){
  </ul>
 
  <div class="tab-content">
-   <div id="Verlauf-Tab" class="tab-pane fade in active">
+   <div id="Verlauf-Tab" class="tab-pane fade">
      <iframe src="verlauf.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
-   <div id="Labor-Tab" class="tab-pane fade">
+   <div id="Labor-Tab" class="tab-pane fade in active">
      <iframe src="diagramm.php" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
    <div id="Decision-Support-Tab" class="tab-pane fade">

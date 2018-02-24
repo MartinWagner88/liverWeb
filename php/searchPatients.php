@@ -38,13 +38,13 @@ try {
         foreach($stmt->fetchAll() as $value){
         //foreach($result as $x->$y){
           echo "<tr>
-                  <td><label class='radio-inline'><input type='radio' id='wahlPatient".$value['idstammdaten']."' name='wahlPatient' value='".$value['idstammdaten']."'";
-                  if($counter){echo "checked";};
-                  echo "></label></td>".
-                  "<td>".$value["nachname"]."</td>
+                  <td>".$value["nachname"]."</td>
                   <td>".$value["vorname"]."</td>
                   <td>".$value["geburtsdatum"]."</td>
                   <td>".$value["geschlecht"]."</td>
+                  <td><label class='radio-inline'><input type='radio' id='wahlPatient".$value['idstammdaten']."' name='wahlPatient' value='".$value['idstammdaten']."'";
+                  if($counter){echo "checked";};
+                  echo "></label></td>
                 </tr>
           ";
           echo $value["idstammdaten"]." asd ".$counter."<br>";
