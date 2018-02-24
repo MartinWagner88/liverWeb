@@ -1,4 +1,4 @@
-$('document').ready(function() { 
+$('document').ready(function() {
 	/* handling form validation */
 	$("#login-form").validate({
 		rules: {
@@ -6,7 +6,7 @@ $('document').ready(function() {
 				required: true,
 			},
 			benutzer_name: {
-				required: true,				
+				required: true,
 			},
 		},
 		messages: {
@@ -15,25 +15,27 @@ $('document').ready(function() {
 			 },
 			benutzer_name: "Bitte geben Sie Ihren Benutzernamen an!",
 		},
-		submitHandler: submitForm	
-	});	   
+		submitHandler: submitForm
+	});
 	/* Handling login functionality */
-	function submitForm() {		
-		var data = $("#login-form").serialize();				
-		$.ajax({				
+	function submitForm() {
+		var data = $("#login-form").serialize();
+		$.ajax({
 			type : 'POST',
-			url  : 'liverWeb/login.php',
+			url  : 'login.php',
 			data : data,
-			beforeSend: function(){	
+			beforeSend: function(){
 				$("#error").fadeOut();
 				$("#login_button").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; sending ...');
 			},
-			success : function(response){						
-				if(response=="ok"){									
-					$("#login_button").html('<img src="liverWeb/bilder/ajax-loader.gif" /> &nbsp; Signing In ...');
-					setTimeout(' window.location.href = "liverWeb/main.html"; ',4000);
-				} else {									
-					$("#error").fadeIn(1000, function(){						
+			success : function(response){
+				console.log("test");
+				if(response){
+					$("#login_button").html('<img src="bilder/ajax-loader.gif" /> &nbsp; Signing In ...');
+					setTimeout(' window.location.href = "main.php"; ',4000);
+				} else {
+					console.log("else");
+					$("#error").fadeIn(1000, function(){
 						$("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+' Das Passwort ist für den Benutzer nicht g&uumlltig!</div>');
 						$("#login_button").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In');
 					});
@@ -41,5 +43,5 @@ $('document').ready(function() {
 			}
 		});
 		return false;
-	}   
+	}
 });

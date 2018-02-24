@@ -29,10 +29,10 @@
 		<div class="form-group">
 			<button type="submit" class="btn btn-default" name="login_button" id="login_button">
 			<span class="glyphicon glyphicon-log-in"></span> &nbsp; Anmelden
-			</button> 
-		</div> 
-	</form>		
-		
+			</button>
+		</div>
+	</form>
+
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

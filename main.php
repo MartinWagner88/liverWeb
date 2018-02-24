@@ -39,7 +39,7 @@ if(!isset($_SESSION['user_session'])){
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sign-In<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Log-Out</a></li>
+            <li><a href="logout.php">Log-Out</a></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -154,7 +154,7 @@ if(!isset($_SESSION['user_session'])){
      <iframe src="verlauf.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
    <div id="Labor-Tab" class="tab-pane fade">
-     <iframe src="diagramm.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
+     <iframe src="diagramm.php" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
    <div id="Decision-Support-Tab" class="tab-pane fade">
      <iframe src="patient_Decision-Support.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
