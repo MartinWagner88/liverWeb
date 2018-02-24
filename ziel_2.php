@@ -1,10 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <title>Unbenanntes Dokument</title>
 </head>
 
@@ -46,15 +44,19 @@ mysqli_close($verbindung);
 
 $pdo = new PDO('mysql:host=localhost;dbname=liverweb', 'root', '');
 
-$sql = "SELECT datum, kommentar, arzt FROM bericht WHERE stammdaten_idstammdaten='$idstammdaten'";
+$sql = "SELECT datum, kommentar, arzt FROM bericht WHERE stammdaten_idstammdaten='$idstammdaten' ORDER BY datum DESC";
 
 ?> 
 <div class="container">
 
-<table = class="table table-hover table-bordered">
+<div class="panel-group" id='accordion'>
+
 
 <?php
+$zahl_panel=0;
+
 foreach ($pdo->query($sql) as $row) {
+	$zahl_panel++;
 	$datum=strtok($row['datum'], " ");
 	$uhrzeit=strtok("");
 	$jahr=strtok($datum,"-");
@@ -62,15 +64,25 @@ foreach ($pdo->query($sql) as $row) {
 	$tag=strtok("-");
 	$stunden=strtok($uhrzeit, ":");
 	$minuten=strtok(":");
-   echo "<div><h3>".$tag.".".$monat.".".$jahr.", ".$stunden.":".$minuten." &ndash; ".$row['arzt']."</h3><p>".$row['kommentar']."</p> </div>";
- 
+	
+	echo "<div class='panel panel-default'>";
+	echo "<div class='panel-heading'>";
+	echo "<h3 class='panel-title'>";
+	echo "<a data-toggle='collapse' data-parent='#accordion' href='#collapse".$zahl_panel."'>".$tag.".".$monat.".".$jahr.", ".$stunden.":".$minuten." &ndash; ".$row['arzt']."</a></h3></div>";
+	echo "<div id='collapse".$zahl_panel."' class='panel-collapse collapse ";
+	if ($zahl_panel==1){echo "in";};
+	echo "'> <div class='panel-body'>".$row['kommentar'];
+	echo "</div></div></div>";
+	 
 }
 ?>
 
-</table>
+</div>
 </div>
 
 ?>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
