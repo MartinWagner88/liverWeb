@@ -1,0 +1,38 @@
+[
+	{"geschlecht":{
+		"w":"Die Patientin ", 
+		"m":"Der Patient "
+		}
+	}, 
+	{"pruritus":{
+		"p0": "verneint das Vorliegen von Pruritus. ",
+		"p1": "berichtet von Pruritus (Intensität:  " 
+		}
+	},
+	{"allgemeinzustand":{
+		"gut":"gutem Allgemeinzustand",
+		"leichtRe":"leicht reduziertem Allgemeinzustand",
+		"deutlRe":"deutlich reduziertem Allgemeinzustand"
+		}
+	},
+	{"hepEnz":{
+		"he1":"Es ergab sich kein Hinweis auf eine hepatische Enzephalopathie. ",
+		"he2":"Es liegt eine leichtgradige hepatische Enzephalopathie vor. ",
+		"he3":"Es liegt eine hochgradige hepatische Enzephalopathie vor. "
+		}
+	},
+	{"blutung":{
+		"n":"verneinte das Vorliegen einer gastrointestinalen Blutung. ",
+		"h":"berichtet von Hämatemesis. ",
+		"t":"berichtet von Teerstuhl. ",
+		"b":"berichtet von Hämatemesis und Teerstuhl. ",
+		"s":"berichtet von einer gastrointestinalen Blutung. "
+		}
+	},
+	{"aszites":{
+		"as1":"Aktuell liegt kein Aszites vor. ",
+		"as2":"Aktuell finden sich geringe Mengen Aszites. ",
+		"as3":"Aktuell finden sich große Mengen Aszites. "
+		}
+	}
+]
