@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   if(isset($_POST["nachname"])){$nachname = test_input($_POST["nachname"]);}
   if(isset($_POST["vorname"])){$vorname = test_input($_POST["vorname"]);}
   if(isset($_POST["geburtsdatum"])){$geburtsdatum = test_input($_POST["geburtsdatum"]);}
-  if(isset($_POST["bericht-datum"])){$bericht = test_input($_POST["bericht-datum"]);}
+  if(isset($_POST["berichtDatum"])){$bericht = test_input($_POST["berichtDatum"]);}
 }
 
 function test_input($data) {
@@ -26,7 +26,7 @@ try {
     //$sql = "SELECT idstammdaten  FROM stammdaten WHERE (nachname='$nachname'
     //                                                          AND vorname='$vorname'
     //                                                          AND geburtsdatum='$geburtsdatum')";
-    $sql = "SELECT idstammdaten FROM stammdaten";
+    $sql = "SELECT idstammdaten, nachname, vorname, geburtsdatum, geschlecht  FROM stammdaten";
     $stmt = $conn->prepare($sql);
         $stmt->execute();
         // for($x=0; $x < count($stmt); $x++){
@@ -34,8 +34,21 @@ try {
         // }
         // set the resulting array to associative
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        foreach($result as $x){
-          echo $x. "asd <br>";
+        $counter=TRUE;
+        foreach($stmt->fetchAll() as $value){
+        //foreach($result as $x->$y){
+          echo "<tr>
+                  <td><label class='radio-inline'><input type='radio' id='wahlPatient".$value['idstammdaten']."' name='wahlPatient' value='".$value['idstammdaten']."'";
+                  if($counter){echo "checked";};
+                  echo "></label></td>".
+                  "<td>".$value["nachname"]."</td>
+                  <td>".$value["vorname"]."</td>
+                  <td>".$value["geburtsdatum"]."</td>
+                  <td>".$value["geschlecht"]."</td>
+                </tr>
+          ";
+          echo $value["idstammdaten"]." asd ".$counter."<br>";
+        $counter=FALSE;
         }
     }
 catch(PDOException $e)
