@@ -35,20 +35,25 @@ try {
         // set the resulting array to associative
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $counter=TRUE;
+        echo "<form> <br>";
         foreach($stmt->fetchAll() as $value){
         //foreach($result as $x->$y){
           echo "<tr>
-                  <td>".$value["nachname"]."</td>
+                  <td>".$value["nachname"]." ".$value["idstammdaten"]."</td>
                   <td>".$value["vorname"]."</td>
                   <td>".$value["geburtsdatum"]."</td>
                   <td>".$value["geschlecht"]."</td>
-                  <td><label class='radio-inline'><input type='radio' id='wahlPatient".$value['idstammdaten']."' name='wahlPatient' value='".$value['idstammdaten']."'";
+                  <td><div class='radio'><label><input type='radio' id='wahlPatient".
+                  $value['idstammdaten']."' name='wahlPatient' value='".$value['idstammdaten']."'";
                   if($counter){echo "checked";};
-                  echo "></label></td>
+                  // <td><label class='radio-inline'><input type='radio' id='wahlPatient".
+                  // $value['idstammdaten']."' name='wahlPatient' value='".$value['idstammdaten']."'";
+                  // if($counter){echo "checked";};
+                  echo "></label></div></td>
                 </tr>
           ";
-          echo $value["idstammdaten"]." asd ".$counter."<br>";
         $counter=FALSE;
+        echo "</form>";
         }
     }
 catch(PDOException $e)
