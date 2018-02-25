@@ -12,11 +12,14 @@
 
 <body class="">
 
+<div class="col-xs-12" style="height:10px;"></div>
+
 <div class="container">
 	<form class="form-login" method="post" id="login-form">
-		<h2 class="form-login-heading">Anmeldung</h2><hr />
-		<div id="error">
-		</div>
+		<h2 class="form-login-heading">Anmeldung - LiverWeb</h2><hr />
+		<p class="form-login-heading">Ihr persönlicher Assistent für die Lebersprechstunde</p>
+		<div class="form-login-heading" id="error">
+		Test-Error</div>
 		<p>&nbsp;</p>
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Benutzername" name="benutzer_name" id="benutzer_name" />
@@ -32,7 +35,6 @@
 			</button>
 		</div>
 	</form>
-
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
