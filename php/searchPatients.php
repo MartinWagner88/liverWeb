@@ -26,7 +26,36 @@ try {
     //$sql = "SELECT idstammdaten  FROM stammdaten WHERE (nachname='$nachname'
     //                                                          AND vorname='$vorname'
     //                                                          AND geburtsdatum='$geburtsdatum')";
-    $sql = "SELECT idstammdaten, nachname, vorname, geburtsdatum, geschlecht  FROM stammdaten";
+    $sql = "SELECT idstammdaten, nachname, vorname, geburtsdatum, geschlecht  FROM stammdaten WHERE ";
+
+    //SQL-Abfrage erweitern um Einschränklungen, wenn die Fehler im Formular gesetzt sind.
+    $firstSqlExtension = true;
+
+    if(!empty($nachname)){
+      $sql=+"(nachname='$nachname'";
+      $firstSqlExtension = FALSE;
+    };
+    if(!empty($vorname)){
+      if($firstSqlExtension){
+        $sql=+"(vorname='$vorname'";
+        $firstSqlExtension = FALSE;
+      } else {
+        $sql=+" AND vorname='$vorname'";
+      }
+    if(!empty($geburtsdatum)){
+      if($firstSqlExtension){
+        $sql=+"(geburtsdatum='$geburtsdatum'";
+        $firstSqlExtension = FALSE;
+      } else {
+        $sql=+" AND geburtsdatum='$geburtsdatum'";
+      }
+    if($firstSqlExtension){
+      $sql=+"()";
+    } else {
+      $sql=+")";
+    }
+
+
     $stmt = $conn->prepare($sql);
         $stmt->execute();
         // for($x=0; $x < count($stmt); $x++){
@@ -35,20 +64,25 @@ try {
         // set the resulting array to associative
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $counter=TRUE;
+        echo "<form> <br>";
         foreach($stmt->fetchAll() as $value){
         //foreach($result as $x->$y){
           echo "<tr>
-                  <td><label class='radio-inline'><input type='radio' id='wahlPatient".$value['idstammdaten']."' name='wahlPatient' value='".$value['idstammdaten']."'";
-                  if($counter){echo "checked";};
-                  echo "></label></td>".
-                  "<td>".$value["nachname"]."</td>
+                  <td>".$value["nachname"]." ".$value["idstammdaten"]."</td>
                   <td>".$value["vorname"]."</td>
                   <td>".$value["geburtsdatum"]."</td>
                   <td>".$value["geschlecht"]."</td>
+                  <td><div class='radio'><label><input type='radio' id='wahlPatient".
+                  $value['idstammdaten']."' name='wahlPatient' value='".$value['idstammdaten']."'";
+                  if($counter){echo "checked";};
+                  // <td><label class='radio-inline'><input type='radio' id='wahlPatient".
+                  // $value['idstammdaten']."' name='wahlPatient' value='".$value['idstammdaten']."'";
+                  // if($counter){echo "checked";};
+                  echo "></label></div></td>
                 </tr>
           ";
-          echo $value["idstammdaten"]." asd ".$counter."<br>";
         $counter=FALSE;
+        echo "</form>";
         }
     }
 catch(PDOException $e)

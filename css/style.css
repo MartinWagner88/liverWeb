@@ -1,0 +1,40 @@
+@charset "utf-8";
+body {
+	background:white;
+}
+.form-login {
+	max-width: 500px;
+	padding: 19px 29px 29px;
+	margin: 0 auto;
+	margin-top: 20px;
+	background-color: #222;
+	border: 1px solid #080808;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	font-family:Tahoma, Geneva, sans-serif;
+	color:#990000;
+	font-weight:lighter;
+}
+.form-login .form-login-heading {
+    color:rgba(255, 255, 255, 0.5);
+}
+.form-login input[type="text"],
+.form-login input[type="password"],
+.form-login input[type="email"] {
+    font-size: 16px;
+    height: 45px;
+    padding: 7px 9px;
+}
+.body-container {
+	margin-top:110px;
+}
+.navbar-brand {
+	font-family:"Lucida Handwriting";
+}
+#btn-submit{
+	height:45px;
+}

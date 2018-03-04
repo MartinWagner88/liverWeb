@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['user_session'])){
+	header("Location: index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="de">
   <head>
@@ -17,6 +24,14 @@
   </head>
   <body>
 
+	<!--Daten einlesen-->
+	<?php
+	include_once("db_connect.php");
+	$sql = "SELECT nachname FROM benutzer WHERE benutzer_id='".$_SESSION['user_session']."'";
+	$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
+	$drNachname = mysqli_fetch_assoc($resultset);
+	?>
+
 
   <!--Main Navigation Bar-->
   <nav class="navbar navbar-inverse navbar-fixes-top">
@@ -25,14 +40,14 @@
         <a class="navbar-brand" href="#">LiverWeb</a>
       </div>
       <ul class="nav navbar-nav">
-        <li><a href="#">Patient</a></li>
+        <li><a href="indexV.php">Patient</a></li>
         <li><a href="#">Kohorte</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sign-In<span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dr. <?php echo $drNachname['nachname'] ?><span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Log-Out</a></li>
+            <li><a href="logout.php">Log-Out</a></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -68,7 +83,7 @@
       <input type="date" class="form-control" id="berichtDatum" name="berichtDatum" placeholder="Vorstellungsdatum">
     </div>
     <button id="patsuchsubmit" type="button" onclick="updatePatTableBody()" class="btn btn-default">Suchen</button>
-    <button type="reset" class="btn btn-default ">Reset</button>
+    <button id="patReset" type="reset" onmouseover="document.getElementById('patReset').style.color = 'blue'" class="btn btn-default ">Reset</button>
     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#newPatientModal">Neuer Patient</button>
   </form>
 
@@ -114,16 +129,15 @@
     </div>
   </div>
 
-  <div class="container-fluid table-responsive">
-    <table id="patTable" class="table-hover">
+  <div class="table-responsive" style="width:95%;margin: 0 auto">
+    <table id="patTable" class="table table-hover">
       <thead>
         <tr>
-          <th> </th>
-          <th>idStammdaten</th>
           <th>Nachname</th>
           <th>Vorname</th>
           <th>Geburtsdatum</th>
           <th>Geschlecht</th>
+					<th>Gewählter Patient</th>
         </tr>
       </thead>
       <tbody id="patTable_Body">
@@ -143,11 +157,11 @@
  </ul>
 
  <div class="tab-content">
-   <div id="Verlauf-Tab" class="tab-pane fade in active">
-     <iframe src="patient_Verlauf.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
+   <div id="Verlauf-Tab" class="tab-pane fade">
+     <iframe src="verlauf.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
-   <div id="Labor-Tab" class="tab-pane fade">
-     <iframe src="patient_Labor.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
+   <div id="Labor-Tab" class="tab-pane fade in active">
+     <iframe src="diagramm.php" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
    <div id="Decision-Support-Tab" class="tab-pane fade">
      <iframe src="patient_Decision-Support.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
