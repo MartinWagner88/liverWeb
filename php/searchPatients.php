@@ -26,7 +26,36 @@ try {
     //$sql = "SELECT idstammdaten  FROM stammdaten WHERE (nachname='$nachname'
     //                                                          AND vorname='$vorname'
     //                                                          AND geburtsdatum='$geburtsdatum')";
-    $sql = "SELECT idstammdaten, nachname, vorname, geburtsdatum, geschlecht  FROM stammdaten";
+    $sql = "SELECT idstammdaten, nachname, vorname, geburtsdatum, geschlecht  FROM stammdaten WHERE ";
+
+    //SQL-Abfrage erweitern um Einschränklungen, wenn die Fehler im Formular gesetzt sind.
+    $firstSqlExtension = true;
+
+    if(!empty($nachname)){
+      $sql=+"(nachname='$nachname'";
+      $firstSqlExtension = FALSE;
+    };
+    if(!empty($vorname)){
+      if($firstSqlExtension){
+        $sql=+"(vorname='$vorname'";
+        $firstSqlExtension = FALSE;
+      } else {
+        $sql=+" AND vorname='$vorname'";
+      }
+    if(!empty($geburtsdatum)){
+      if($firstSqlExtension){
+        $sql=+"(geburtsdatum='$geburtsdatum'";
+        $firstSqlExtension = FALSE;
+      } else {
+        $sql=+" AND geburtsdatum='$geburtsdatum'";
+      }
+    if($firstSqlExtension){
+      $sql=+"()";
+    } else {
+      $sql=+")";
+    }
+
+
     $stmt = $conn->prepare($sql);
         $stmt->execute();
         // for($x=0; $x < count($stmt); $x++){
