@@ -1,5 +1,6 @@
 @charset "utf-8";
 body {
+	background:white;
 }
 .form-login {
 	max-width: 500px;

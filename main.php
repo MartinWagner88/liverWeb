@@ -27,6 +27,9 @@ if(!isset($_SESSION['user_session'])){
 	<!--Daten einlesen-->
 	<?php
 	include_once("db_connect.php");
+
+	$conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
+
 	$sql = "SELECT nachname FROM benutzer WHERE benutzer_id='".$_SESSION['user_session']."'";
 	$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 	$drNachname = mysqli_fetch_assoc($resultset);
@@ -158,10 +161,10 @@ if(!isset($_SESSION['user_session'])){
 
  <div class="tab-content">
    <div id="Verlauf-Tab" class="tab-pane fade">
-     <iframe src="verlauf.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
+     <iframe src="verlauf.php" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
    <div id="Labor-Tab" class="tab-pane fade in active">
-     <iframe src="diagramm.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
+     <iframe src="diagramm.php" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
    <div id="Decision-Support-Tab" class="tab-pane fade">
      <iframe src="patient_Decision-Support.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
