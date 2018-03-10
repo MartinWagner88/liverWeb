@@ -29,12 +29,18 @@ $('document').ready(function() {
 				$("#login_button").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; sending ...');
 			},
 			success : function(response){
+<<<<<<< HEAD
 				console.log("TypResponse:"+typeof(response));
 				console.log("InhaltResponse:"+response);
 				if(response ==="ok"){
 					console.log('richtig');
 					$("#login_button").html('<img src="bilder/ajax-loader.gif" /> &nbsp; Signing In ...');
 					setTimeout(' window.location.href = "main.php"; ',5000);
+=======
+				if(response){
+					$("#login_button").html('<img src="bilder/ajax-loader.gif" /> &nbsp; Einloggen ...');
+					setTimeout(' window.location.href = "main.php"; ',2000);
+>>>>>>> 69acb5d2161a814dc336951c548a0c54c5be78d5
 				} else {
 					console.log("falsch");
 					$("#error").fadeIn(1000, function(){

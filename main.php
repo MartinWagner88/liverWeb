@@ -24,6 +24,14 @@ if(!isset($_SESSION['user_session'])){
   </head>
   <body>
 
+	<!--Daten einlesen-->
+	<?php
+	include_once("db_connect.php");
+	$sql = "SELECT nachname FROM benutzer WHERE benutzer_id='".$_SESSION['user_session']."'";
+	$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
+	$drNachname = mysqli_fetch_assoc($resultset);
+	?>
+
 
   <!--Main Navigation Bar-->
   <nav class="navbar navbar-inverse navbar-fixes-top">
@@ -37,7 +45,7 @@ if(!isset($_SESSION['user_session'])){
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sign-In<span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dr. <?php echo $drNachname['nachname'] ?><span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="logout.php">Log-Out</a></li>
           </ul>
@@ -75,7 +83,7 @@ if(!isset($_SESSION['user_session'])){
       <input type="date" class="form-control" id="berichtDatum" name="berichtDatum" placeholder="Vorstellungsdatum">
     </div>
     <button id="patsuchsubmit" type="button" onclick="updatePatTableBody()" class="btn btn-default">Suchen</button>
-    <button type="reset" class="btn btn-default ">Reset</button>
+    <button id="patReset" type="reset" onmouseover="document.getElementById('patReset').style.color = 'blue'" class="btn btn-default ">Reset</button>
     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#newPatientModal">Neuer Patient</button>
   </form>
 
@@ -121,7 +129,7 @@ if(!isset($_SESSION['user_session'])){
     </div>
   </div>
 
-  <div class="table-responsive" style="width:90%">
+  <div class="table-responsive" style="width:95%;margin: 0 auto">
     <table id="patTable" class="table table-hover">
       <thead>
         <tr>
