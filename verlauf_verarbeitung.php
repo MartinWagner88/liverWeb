@@ -27,8 +27,9 @@ $meld=$_POST["meld_t"];
 $zeit = new DateTime();
 $datum = $zeit->format('Y-m-d H:i:s');
 
+include_once("db_connect.php");
 
-$verbindung = mysqli_connect("localhost", "root", "" ,"liverweb") 
+$verbindung = mysqli_connect($servername, $username, $password , $dbname)
 or die ("Fehler im System!");
 
 $auslesen_id="SELECT idstammdaten  FROM stammdaten WHERE nachname='$nachname' AND vorname='$vorname'";
@@ -58,7 +59,7 @@ $pdo = new PDO('mysql:host=localhost;dbname=liverweb', 'root', '');
 
 $sql = "SELECT datum, kommentar, arzt FROM bericht WHERE stammdaten_idstammdaten='$id_stammdaten' ORDER BY datum DESC";
 
-?> 
+?>
 <div class="container">
 
 <div class="panel-group" id='accordion'>
@@ -76,7 +77,7 @@ foreach ($pdo->query($sql) as $row) {
 	$tag=strtok("-");
 	$stunden=strtok($uhrzeit, ":");
 	$minuten=strtok(":");
-	
+
 	echo "<div class='panel panel-default'>";
 	echo "<div class='panel-heading'>";
 	echo "<h3 class='panel-title'>";
@@ -85,7 +86,7 @@ foreach ($pdo->query($sql) as $row) {
 	if ($zahl_panel==1){echo "in";};
 	echo "'> <div class='panel-body'>".$row['kommentar'];
 	echo "</div></div></div>";
-	 
+
 }
 
 

@@ -15,7 +15,8 @@
 <div class="container">
 	<form class="form-login" method="post" id="login-form">
 		<h2 class="form-login-heading">Anmeldung</h2><hr />
-		<div id="error">
+		<div id="error" style="display:none">
+        
 		</div>
 		<p>&nbsp;</p>
 		<div class="form-group">
@@ -34,6 +35,8 @@
 	</form>
 
 </div>
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

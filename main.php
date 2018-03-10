@@ -153,7 +153,7 @@ if(!isset($_SESSION['user_session'])){
      <iframe src="verlauf.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
    <div id="Labor-Tab" class="tab-pane fade in active">
-     <iframe src="diagramm.php" width="100%" height="100%" style="border:none;position:absolute"></iframe>
+     <iframe src="diagramm.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
    </div>
    <div id="Decision-Support-Tab" class="tab-pane fade">
      <iframe src="patient_Decision-Support.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
