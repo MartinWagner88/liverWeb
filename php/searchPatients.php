@@ -1,5 +1,6 @@
 <!-- Datenbankanbindung nach https://www.w3schools.com/php/php_mysql_select.asp -->
 <?php
+
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
   if(isset($_POST["nachname"])){$nachname = test_input($_POST["nachname"]);}
   if(isset($_POST["vorname"])){$vorname = test_input($_POST["vorname"]);}
@@ -23,38 +24,38 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //$sql = "SELECT idstammdaten  FROM stammdaten WHERE (nachname='$nachname'
-    //                                                          AND vorname='$vorname'
-    //                                                          AND geburtsdatum='$geburtsdatum')";
-    $sql = "SELECT idstammdaten, nachname, vorname, geburtsdatum, geschlecht  FROM stammdaten WHERE ";
 
-    //SQL-Abfrage erweitern um Einschränklungen, wenn die Fehler im Formular gesetzt sind.
-    $firstSqlExtension = true;
+    //Rohe SQL-Abfrage ohne Einschränkungen
+    $sql = "SELECT idstammdaten, nachname, vorname, geburtsdatum, geschlecht  FROM stammdaten";
 
+    //SQL-Abfrage erweitern um Einschränkungen, wenn die Felder im Formular gesetzt sind.
+
+    $firstSqlExtension = TRUE;
     if(!empty($nachname)){
-      $sql=+"(nachname='$nachname'";
+      $sql .= " WHERE (nachname LIKE '$nachname%'";
       $firstSqlExtension = FALSE;
     };
     if(!empty($vorname)){
       if($firstSqlExtension){
-        $sql=+"(vorname='$vorname'";
+        $sql .= " WHERE (vorname LIKE '$vorname%'";
         $firstSqlExtension = FALSE;
-      } else {
-        $sql=+" AND vorname='$vorname'";
+        }
+        else {
+        $sql .= " AND vorname LIKE '$vorname%'";
+        }
       }
     if(!empty($geburtsdatum)){
       if($firstSqlExtension){
-        $sql=+"(geburtsdatum='$geburtsdatum'";
+        $sql .= " WHERE (geburtsdatum='$geburtsdatum'";
         $firstSqlExtension = FALSE;
-      } else {
-        $sql=+" AND geburtsdatum='$geburtsdatum'";
+        }
+        else {
+        $sql .= " AND geburtsdatum='$geburtsdatum'";
+        }
       }
-    if($firstSqlExtension){
-      $sql=+"()";
-    } else {
-      $sql=+")";
+    if(!$firstSqlExtension){
+      $sql .= ")";
     }
-
 
     $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -67,7 +68,7 @@ try {
         echo "<form> <br>";
         foreach($stmt->fetchAll() as $value){
         //foreach($result as $x->$y){
-          echo "<tr>
+          echo "<tr id=tr_".$value["idstammdaten"].">
                   <td>".$value["nachname"]." ".$value["idstammdaten"]."</td>
                   <td>".$value["vorname"]."</td>
                   <td>".$value["geburtsdatum"]."</td>
@@ -84,12 +85,12 @@ try {
         $counter=FALSE;
         echo "</form>";
         }
-    }
-catch(PDOException $e)
-    {
-    echo $sql . "<br>" . $e->getMessage();
-    }
+     }
+     catch(PDOException $e)
+     {
+     echo $sql . "<br>" . $e->getMessage();
+      }
 
-$conn = null;
+// $conn = null;
 
 ?>

@@ -1,5 +1,7 @@
 
-
+// Defining global variables
+  var selectedPatientID;
+  var testCounter = 0;
 
 
 //Kommunikation mit Datenbank nach https://www.w3schools.com/js/js_ajax_database.asp
@@ -15,20 +17,62 @@ function updatePatTableBody(){
                      '&vorname=' + vorname +
                      '&geburtsdatum=' + geburtsdatum +
                      '&berichtDatum=' + berichtDatum;
-  console.log(formData);
-  //$.post("Pinky-Brain/php/searchPatients.php",formData);
   var xhttp;
       document.getElementById('patTable_Body').innerHTML = formData;
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function(){
-    console.log(xhttp.readyState);
-    console.log(xhttp.status);
     if (this.readyState == 4 && this.status == 200){
       document.getElementById('patTable_Body').innerHTML = this.responseText;
-      console.log(this.responseText);
     }
   };
   xhttp.open("POST","php/searchPatients.php",true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send(formDatad);
 }
+
+function choosePatient(){
+
+}
+
+// $(document).ready(function(){
+//   $("thead").click(function(){
+//       $("tbody").css("background-color","red");
+//       console.log("TEST" + testCounter);
+//       testCounter =+ 1;
+//   });
+//
+//   $('#patTable tr').click(function(){
+//     console.log("Funktion 2");
+//     $("thead").css("background-color","green");
+//     $("tbody").css("background-color","green");
+//   });
+// });
+
+$(document).ready(function(){
+  $("#patTable thead").dblclick(function(){
+    $("#patTable tbody tr:nth-of-type(3)").css("background-color","blue");
+    console.log("3rd row blue; "+testCounter);
+    testCounter += 1;
+  });
+
+  $("#patTable thead").mouseenter(function(){
+    $("#patTable").css("background-color","green");
+    console.log("Table-Background green; "+testCounter);
+    testCounter += 1;
+  });
+
+  $("#patTable").dblclick(function(){
+    $("#patTable").css("background-color","red");
+    console.log("Background red; " + testCounter);
+    testCounter += 1;
+  });
+
+  $("#patTable").on('click', 'tr', function(){
+    $(this).css("background-color","yellow");
+    var tr_value = this.id.slice(3);
+    console.log(tr_value + " on ('click') yellow; " + testCounter);
+    testCounter += 1;
+  });
+
+
+});
