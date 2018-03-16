@@ -1,14 +1,9 @@
 <?php
 
-/* Database connection start */
+/* Database connection local data*/
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "liverweb";
-$conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
-if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-}
-
+$pdoSerAUs = 'mysql:host='.$servername.';dbname='.$dbname;
 ?>

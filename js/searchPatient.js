@@ -27,7 +27,7 @@ function updatePatTableBody(){
   };
   xhttp.open("POST","php/searchPatients.php",true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send(formData);
+  xhttp.send(formDatad);
 }
 
 function choosePatient(){

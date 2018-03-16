@@ -18,7 +18,7 @@
 	<form class="form-login" method="post" id="login-form">
 		<h2 class="form-login-heading">Anmeldung - LiverWeb</h2><hr />
 		<p class="form-login-heading">Ihr persönlicher Assistent für die Lebersprechstunde</p>
-		<div class="form-login-heading" id="error">
+		<div class="form-login-heading" id="error" style="display:none">
 		Test-Error</div>
 		<p>&nbsp;</p>
 		<div class="form-group">
@@ -36,6 +36,8 @@
 		</div>
 	</form>
 </div>
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

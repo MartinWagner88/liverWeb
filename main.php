@@ -27,6 +27,8 @@ if(!isset($_SESSION['user_session'])){
 	<!--Daten einlesen-->
 	<?php
 	include_once("db_connect.php");
+	$conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
+
 	$sql = "SELECT nachname, vorname, titel FROM benutzer WHERE benutzer_id='".$_SESSION['user_session']."'";
 	$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 	$nutzer = mysqli_fetch_assoc($resultset);
