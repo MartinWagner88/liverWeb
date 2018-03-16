@@ -49,30 +49,39 @@ function choosePatient(){
 // });
 
 $(document).ready(function(){
-  $("#patTable thead").dblclick(function(){
-    $("#patTable tbody tr:nth-of-type(3)").css("background-color","blue");
-    console.log("3rd row blue; "+testCounter);
-    testCounter += 1;
+
+//Auswahl eines Patienten aus PatientTable nach Suche
+  $("#patTable tbody").on('click', 'tr', function(){
+    //Entfärben sämtlicher Zeilen
+    $("#patTable tbody tr").css("background-color","white");
+    //Einfärben der gewählten Zeile
+    $(this).css("background-color","#cccccc");
+    var selectedPatientID = this.id.slice(3);
+    $("#patNumberDisplay").html('Patienten-ID: ' + selectedPatientID);
+    //"Patienten-ID: ".selectedPatientID;
   });
 
-  $("#patTable thead").mouseenter(function(){
-    $("#patTable").css("background-color","green");
-    console.log("Table-Background green; "+testCounter);
-    testCounter += 1;
-  });
 
-  $("#patTable").dblclick(function(){
-    $("#patTable").css("background-color","red");
-    console.log("Background red; " + testCounter);
-    testCounter += 1;
-  });
+// //Test-Funktionen zum Ausprobieren der Funktionalität von jquery und css
+//   $("#patTable thead").dblclick(function(){
+//     $("#patTable tbody tr:nth-of-type(3)").css("background-color","blue");
+//     console.log("3rd row blue; "+testCounter);
+//     testCounter += 1;
+//   });
+//
+//   $("#patTable thead").mouseenter(function(){
+//     $("#patTable").css("background-color","green");
+//     console.log("Table-Background green; "+testCounter);
+//     testCounter += 1;
+//   });
+//
+//   $("#patTable").dblclick(function(){
+//     $("#patTable").css("background-color","red");
+//     console.log("Background red; " + testCounter);
+//     testCounter += 1;
+//   });
 
-  $("#patTable").on('click', 'tr', function(){
-    $(this).css("background-color","yellow");
-    var tr_value = this.id.slice(3);
-    console.log(tr_value + " on ('click') yellow; " + testCounter);
-    testCounter += 1;
-  });
+
 
 
 });

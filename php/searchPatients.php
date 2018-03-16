@@ -69,20 +69,12 @@ try {
         foreach($stmt->fetchAll() as $value){
         //foreach($result as $x->$y){
           echo "<tr id=tr_".$value["idstammdaten"].">
-                  <td>".$value["nachname"]." ".$value["idstammdaten"]."</td>
+                  <td>".$value["nachname"]."</td>
                   <td>".$value["vorname"]."</td>
                   <td>".$value["geburtsdatum"]."</td>
                   <td>".$value["geschlecht"]."</td>
-                  <td><div class='radio'><label><input type='radio' id='wahlPatient".
-                  $value['idstammdaten']."' name='wahlPatient' value='".$value['idstammdaten']."'";
-                  if($counter){echo "checked";};
-                  // <td><label class='radio-inline'><input type='radio' id='wahlPatient".
-                  // $value['idstammdaten']."' name='wahlPatient' value='".$value['idstammdaten']."'";
-                  // if($counter){echo "checked";};
-                  echo "></label></div></td>
                 </tr>
           ";
-        $counter=FALSE;
         echo "</form>";
         }
      }
