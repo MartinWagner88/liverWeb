@@ -27,9 +27,9 @@ if(!isset($_SESSION['user_session'])){
 	<!--Daten einlesen-->
 	<?php
 	include_once("db_connect.php");
-	$sql = "SELECT nachname FROM benutzer WHERE benutzer_id='".$_SESSION['user_session']."'";
+	$sql = "SELECT nachname, vorname, titel FROM benutzer WHERE benutzer_id='".$_SESSION['user_session']."'";
 	$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-	$drNachname = mysqli_fetch_assoc($resultset);
+	$nutzer = mysqli_fetch_assoc($resultset);
 	?>
 
 
@@ -42,10 +42,11 @@ if(!isset($_SESSION['user_session'])){
       <ul class="nav navbar-nav">
         <li><a href="indexV.php">Patient</a></li>
         <li><a href="#">Kohorte</a></li>
+				<li><a href="#" id="patNumberDisplay">Patienten-ID:</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dr. <?php echo $drNachname['nachname'] ?><span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $nutzer['titel']." ".substr($nutzer['vorname'],0,1).". ".$nutzer['nachname'] ?><span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="logout.php">Log-Out</a></li>
           </ul>
@@ -129,7 +130,8 @@ if(!isset($_SESSION['user_session'])){
     </div>
   </div>
 
-  <div class="table-responsive" style="width:95%;margin: 0 auto">
+	<div style="overflow: scroll;">
+  <div class="table-responsive" style="width:95%;margin: 0 auto;">
     <table id="patTable" class="table table-hover">
       <thead>
         <tr>
@@ -137,19 +139,21 @@ if(!isset($_SESSION['user_session'])){
           <th>Vorname</th>
           <th>Geburtsdatum</th>
           <th>Geschlecht</th>
-					<th>Gewählter Patient</th>
         </tr>
       </thead>
       <tbody id="patTable_Body">
       </tbody>
     </table>
   </div>
+	</div>
 
 
 <div class="col-xs-12" style="height:10px;"></div>
 
  <ul class="nav nav-tabs nav-justified">
-   <li><a data-toggle="tab" href="#Verlauf-Tab">Verlauf</a></li>
+   <li><a data-toggle="tab" href="#Verlaufseintrag-Tab">Verlaufs-Eintrag</a></li>
+	 <li><a data-toggle="tab" href="#Verlauf-MW-Tab">Verlauf-MW</a></li>
+	 <li><a data-toggle="tab" href="#Verlauf-Tab">Verlauf gesamt</a></li>
    <li><a data-toggle="tab" href="#Labor-Tab">Labor</a></li>
    <li><a data-toggle="tab" href="#Decision-Support-Tab">Decision-Support</a></li>
    <li><a data-toggle="tab" href="#Upload-Tab">Upload</a></li>
@@ -157,11 +161,28 @@ if(!isset($_SESSION['user_session'])){
  </ul>
 
  <div class="tab-content">
-   <div id="Verlauf-Tab" class="tab-pane fade">
-     <iframe src="verlauf.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
+   <div id="Verlaufseintrag-Tab" class="tab-pane fade">
+		 <?php
+		 include "verlauf.php";
+		 ?>
+   <!-- <iframe src="verlauf.html" width="100%" height="100%" style="border:none;position:absolute"></iframe> -->
    </div>
-   <div id="Labor-Tab" class="tab-pane fade in active">
-     <iframe src="diagramm.php" width="100%" height="100%" style="border:none;position:absolute"></iframe>
+	 <div id="Verlauf-MW-Tab" class="tab-pane fade in active">
+		 <?php
+		 include "verlauf_mw.php";
+		 ?>
+	 <!-- <iframe src="verlauf.html" width="100%" height="100%" style="border:none;position:absolute"></iframe> -->
+	 </div>
+	 <div id="Verlauf-Tab" class="tab-pane fade">
+		 <?php
+		 include "verlauf_gesamt.php";
+		 ?>
+   </div>
+   <div id="Labor-Tab" class="tab-pane fade">
+		 <?php
+		 include "diagramm.php";
+		 ?>
+		 <!-- <iframe src="diagramm.php" width="100%" height="100%" style="border:none;position:absolute"></iframe> -->
    </div>
    <div id="Decision-Support-Tab" class="tab-pane fade">
      <iframe src="patient_Decision-Support.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>

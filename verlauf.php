@@ -53,7 +53,7 @@
 
 <div class="form-group">
 <h4>K&ouml;rpergewicht: <br/></h4>
-<label for="kgKG"> 
+<label for="kgKG">
 <input type="number" min="25" max="250" step="0.1" id="kgKG" name="kgKG" required="required"/>
 kg</label>
 
@@ -79,7 +79,7 @@ kg</label>
 <div class="form-group" id="group_hepatitis_B" style="display:none">
 
 <div class="form-group">
-<label for="inr">GPT: 
+<label for="inr">GPT:
 <input type="number" min="0" max="50000" step="0.1" id="gpt" name="gpt"/>
 U/l</label>
 </div>
@@ -121,25 +121,25 @@ U/l</label>
 
 <div class="form-group">
 <h4>Laborwerte:  <br/></h4>
-<label for="albumin">Albumin: 
+<label for="albumin">Albumin:
 <input type="number" min="5" max="100" step="0.1" id="albumin" name="albumin"/>
 g/l</label>
 </div>
 
 <div class="form-group">
-<label for="inr">INR: 
+<label for="inr">INR:
 <input type="number" min="0" max="50" step="0.01" id="inr" name="inr"/>
 </label>
 </div>
 
 <div class="form-group">
-<label for="bili">Bilirubin: 
+<label for="bili">Bilirubin:
 <input type="number" min="0" max="100" step="0.1" id="bili" name="bili"/>
 mg/dl</label>
 </div>
 
 <div class="form-group">
-<label for="krea">Kreatinin: 
+<label for="krea">Kreatinin:
 <input type="number" min="0" max="30" step="0.1" id="krea" name="krea"/>
 mg/dl</label>
 </div>
@@ -152,11 +152,11 @@ mg/dl</label>
 </div>
 
 <div class="form-group">
-<label for="wieVorZahl">Wiedervorstellung in:  
+<label for="wieVorZahl">Wiedervorstellung in:
 <input type="number" min="0" max="100" step="1" id="wieVorZahl" name="wieVorZahl"/>
 </label>
 
-<label for="wieVorEinheit"> 
+<label for="wieVorEinheit">
 <select name="wieVorEinheit" id="wieVorEinheit">
 <option label="Monate(n)" selected="selected">Monate(n)</option>
 <option label="Wochen(n)">Woche(n)</option>
