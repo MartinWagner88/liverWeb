@@ -18,6 +18,8 @@ if(!isset($_SESSION['user_session'])){
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
+		<!-- Own css -->
+		<link rel="stylesheet" href="css/master.css">
     <!--Java-Script-Dateien -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -34,61 +36,40 @@ if(!isset($_SESSION['user_session'])){
 	$nutzer = mysqli_fetch_assoc($resultset);
 	?>
 
-
   <!--Main Navigation Bar-->
-  <nav class="navbar navbar-inverse navbar-fixes-top">
+  <nav id="mainNavbar" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">LiverWeb</a>
       </div>
-      <ul class="nav navbar-nav">
-        <li><a href="indexV.php">Patient</a></li>
-        <li><a href="#">Kohorte</a></li>
-				<li><a href="#" id="patNumberDisplay">Patienten-ID:</a></li>
-      </ul>
+		<!-- Inline Form to search for or add Patients.  -->
+		<form class="navbar-form navbar-left">
+				<div class="form-group">
+		      <input type="text" class="form-control" id="nachname" name="nachname" placeholder="Nachname">
+		      <input type="text" class="form-control" id="vorname" name="vorname" placeholder="Vorname">
+			    <label for="geburtsdatum" style="color:rgba(255, 255, 255, 0.5);"> Geburtsdatum:</label>
+		      <input type="date" class="form-control" id="geburtsdatum" name="geburtsdatum" min="1900-01-01" placeholder="Geburtsdatum">
+		    </div>
+		    <button id="patsuchsubmit" type="button" onclick="updatePatTableBody()" class="btn btn-default">
+						<span class="glyphicon glyphicon-search"></span>
+				</button>
+		    <button id="patReset" type="reset" class="btn btn-default ">
+					<span class="glyphicon glyphicon-remove"></span>
+			</button>
+		    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#newPatientModal">Neuer Patient</button>
+			</form>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $nutzer['titel']." ".substr($nutzer['vorname'],0,1).". ".$nutzer['nachname'] ?><span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $nutzer['titel']." ".substr($nutzer['vorname'],0,1).". ".$nutzer['nachname'] ?> <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="logout.php">Log-Out</a></li>
           </ul>
         </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span>
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Einstellung 1</a></li>
-            <li><a href="#">Einstellung 2</a></li>
-            <li><a href="#">Einstellung 3</a></li>
-          </ul>
-        </li>
-      <a href="#"><img src="pictures/UK-Erlangen-Logo.jpg" alt="UK-Erlangen" style="height:40pt "></a>
+			<!-- Link to Glyphicon-Homepage as a thank you for the free glyphicons -->
+      <a target="_blank" href="http://glyphicons.com/" class="navbar-text glyphicon glyphicon-glass"></a>
       </ul>
     </div>
   </nav>
-
-  <!--Inline Form to search for or add Patients. action="searchPatients.php" method="post"-->
-  <form class="form-inline" >
-    <div class="form-group">
-      <label for="nachname">Nachname:</label>
-      <input type="text" class="form-control" id="nachname" name="nachname" placeholder="Nachname">
-    </div>
-    <div class="form-group">
-      <label for="vorname">Vorname:</label>
-      <input type="text" class="form-control" id="vorname" name="vorname" placeholder="Vorname">
-    </div>
-    <div class="form-group">
-      <label for="geburtsdatum">Geburtsdatum:</label>
-      <input type="date" class="form-control" id="geburtsdatum" name="geburtsdatum" min="1900-01-01" placeholder="Geburtsdatum">
-    </div>
-    <div class="form-group">
-      <label for="berichtDatum">Vorstellungsdatum:</label>
-      <input type="date" class="form-control" id="berichtDatum" name="berichtDatum" placeholder="Vorstellungsdatum">
-    </div>
-    <button id="patsuchsubmit" type="button" onclick="updatePatTableBody()" class="btn btn-default">Suchen</button>
-    <button id="patReset" type="reset" onmouseover="document.getElementById('patReset').style.color = 'blue'" class="btn btn-default ">Reset</button>
-    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#newPatientModal">Neuer Patient</button>
-  </form>
 
   <!-- Modal newPatientModal-->
   <div id="newPatientModal" class="modal fade" role="dialog">
@@ -132,52 +113,46 @@ if(!isset($_SESSION['user_session'])){
     </div>
   </div>
 
-	<div style="overflow: scroll;">
-  <div class="table-responsive" style="width:95%;margin: 0 auto;">
-    <table id="patTable" class="table table-hover">
-      <thead>
-        <tr>
-          <th>Nachname</th>
-          <th>Vorname</th>
-          <th>Geburtsdatum</th>
-          <th>Geschlecht</th>
-        </tr>
-      </thead>
-      <tbody id="patTable_Body">
-      </tbody>
-    </table>
-  </div>
+	<div id="patTableContainer" class="container-fluid" style="margin-top:55px">
+		<div id="noPatientError" class="container" style="display:none">
+			<div class="alert alert-danger text-center">
+			<strong>Achtung!</strong> Kein Patient mit den angegebenen Merkmalen gefunden.
+			</div>
+		</div>
+	  <div id="patTableDiv" class="table-responsive" style="width:95%;margin: 0 auto;display:none">
+	    <table id="patTable" class="table table-hover">
+	      <thead>
+	        <tr>
+	          <th>Nachname</th>
+	          <th>Vorname</th>
+	          <th>Geburtsdatum</th>
+	          <th>Geschlecht</th>
+	        </tr>
+	      </thead>
+	      <tbody id="patTable_Body">
+	      </tbody>
+	    </table>
+	  </div>
 	</div>
 
 
-<div class="col-xs-12" style="height:10px;"></div>
+<div class="container-fluid"></div>
 
- <ul class="nav nav-tabs nav-justified">
-   <li><a data-toggle="tab" href="#Verlaufseintrag-Tab">Verlaufs-Eintrag</a></li>
-	 <li><a data-toggle="tab" href="#Verlauf-MW-Tab">Verlauf-MW</a></li>
-	 <li><a data-toggle="tab" href="#Verlauf-Tab">Verlauf gesamt</a></li>
-   <li><a data-toggle="tab" href="#Labor-Tab">Labor</a></li>
-   <li><a data-toggle="tab" href="#Decision-Support-Tab">Decision-Support</a></li>
-   <li><a data-toggle="tab" href="#Upload-Tab">Upload</a></li>
-   <li><a data-toggle="tab" href="#Token-Tab">Token</a></li>
+ <ul class="nav nav-tabs nav-justified navbar-inverse">
+   <li><a data-toggle="tab" href="#Verlaufseintrag-Tab"><span class="glyphicon glyphicon-list-alt"></span> Verlaufs-Eintrag</a></li>
+	 <li><a data-toggle="tab" href="#Verlauf-Tab"><span class="glyphicon glyphicon-th-list"></span> Verlauf gesamt</a></li>
+   <li><a data-toggle="tab" href="#Labor-Tab"><span class="glyphicon glyphicon-stats"></span> Labor</a></li>
  </ul>
 
  <div class="tab-content">
    <div id="Verlaufseintrag-Tab" class="tab-pane fade">
 		 <?php
-		 //include "verlauf.php";
+		 include "verlauf.php";
 		 ?>
-   <!-- <iframe src="verlauf.html" width="100%" height="100%" style="border:none;position:absolute"></iframe> -->
    </div>
-	 <div id="Verlauf-MW-Tab" class="tab-pane fade in active">
-		 <?php
-		 include "verlauf_mw.php";
-		 ?>
-	 <!-- <iframe src="verlauf.html" width="100%" height="100%" style="border:none;position:absolute"></iframe> -->
-	 </div>
 	 <div id="Verlauf-Tab" class="tab-pane fade">
 		 <?php
-		 //include "verlauf_gesamt.php";
+		 include "verlauf_gesamt.php";
 		 ?>
    </div>
    <div id="Labor-Tab" class="tab-pane fade">
@@ -186,16 +161,6 @@ if(!isset($_SESSION['user_session'])){
 		 ?>
 		 <!-- <iframe src="diagramm.php" width="100%" height="100%" style="border:none;position:absolute"></iframe> -->
    </div>
-   <div id="Decision-Support-Tab" class="tab-pane fade">
-     <iframe src="patient_Decision-Support.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
-   </div>
-   <div id="Upload-Tab" class="tab-pane fade">
-     <iframe src="patient_Upload.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
-   </div>
-   <div id="Token-Tab" class="tab-pane fade">
-     <iframe src="patient_Token.html" width="100%" height="100%" style="border:none;position:absolute"></iframe>
-   </div>
-
  </div>
 
 
