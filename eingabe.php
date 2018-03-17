@@ -239,9 +239,9 @@
       <div class="text-center">
         <label for="">Klinische Ergebnisse</label>
       </div>
-      <button type="button" id="button_empfehlung"class="btn btn-basic btn-block disabled" style=""> Empfehlungen </button>
-      <button type="button" id="child_e" name="child_e" class="btn btn-basic btn-block disabled" style=""> Child-Pugh </button>
-      <button type="button" id="meld_e" name="meld_e" class="btn btn-basic btn-block disabled" style=""> MELD </button>
+      <button type="button" id="button_empfehlung"class="btn btn-basic btn-block disabled" data-toggle="modal" style="">Hepatitis-Therapie</button>
+      <button type="button" id="child_e" name="child_e" class="btn btn-basic btn-block disabled" data-toggle="modal" style=""> Child-Pugh </button>
+      <button type="button" id="meld_e" name="meld_e" class="btn btn-basic btn-block disabled" data-toggle="modal" style=""> MELD </button>
     </div>
   </div>
 </div>
@@ -260,6 +260,77 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Die Daten wurden erfolgreich gespeichert.</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="antivirale_therapie_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Erläuterung der Therapieempfehlung bei Hepatitis B</h4>
+        <img class="img-responsive img-rounded" src="pictures/hep_B_algorithmus.png" alt="abc">
+        <br>
+        <p>Übersicht zur Therapie-Indikation bei einer Hepatitis B (S. 15 in
+          <a target="_blank" href="https://www.dgvs.de/wp-content/uploads/2016/11/Leitlinie_Hepatitis_B.pdf">
+              <span class="glyphicon glyphicon-link"></span>
+          </a>
+          ).
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="child_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Einstufung und Konsequenzen des Child-Stadiums einer Leberzirrhose</h4>
+        <img class="img-responsive img-rounded" src="pictures/child.png" alt="abc">
+        <br>
+        <p id="child_modal_p"></p>
+        <p>Die Stadieneinteilung und Aussagen zur Prognose stammen aus
+          <a target="_blank" href="https://de.wikipedia.org/wiki/Child-Pugh-Score">
+              <span class="glyphicon glyphicon-link"></span>
+          </a>
+          .
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="meld_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Prognose bei Leberzirrhose im Endstadium je nach MELD</h4>
+        <div class="container">
+            <img class="img-responsive img-rounded " src="pictures/meld.jpg" alt="abc">
+        </div>
+        <p id="meld_modal_p"></p>
+        <p>Je höher der Punktwert, umso niedriger ist die Wahrscheinlichkeit des Patienten,
+          die nächsten 3 Monate ohne Lebertransplantation zu überleben.
+          Die Abbildung zeigt die geschätzte Überlebenswahrscheinlichkeit bei verschiedenen MELD Werten (Quelle:
+          <a target="_blank" href="https://lebertransplantation.eu/transplantation/vor-der-transplantation/untersuchung-und-auswahl-der-patienten-zur-lebertransplantation-meld-score.html">
+              <span class="glyphicon glyphicon-link"></span>
+          </a>
+          ).
+        </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Schließen</button>
