@@ -46,6 +46,8 @@ $(document).ready(function(){
     $(this).css("background-color","#cccccc");
     selectedPatientID = this.id.slice(3);
     selectedPatientGe = this.cells[3].innerHTML;
+    document.getElementById('id_patient_t').value=selectedPatientID;
+    $("#patNumberDisplay").html('Patienten-ID: ' + selectedPatientID);
     diagramm_laden_funktion('meld', selectedPatientID);
   });
 
