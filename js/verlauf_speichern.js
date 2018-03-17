@@ -18,16 +18,16 @@ function formular_ajax(){
 };
 
 function formular_ajax_neuerPatient(){
-    var daten_neuerPatient = "nachname="+$('#nachname').val()+"&vorname="+$('#vornmae').val()+"&geburtsdatum="+$('#geburtsdatum').val()+"&geschlecht="+$('input[name="geschlecht_m"]:checked').val();
+    var daten_neuerPatient = "nachname_m="+$('#nachname_m').val()+"&vorname_m="+$('#vorname_m').val()+"&geburtsdatum_m="+$('#geburtsdatum_m').val()+"&geschlecht_m="+$('input[name="geschlecht_m"]:checked').val();
     $.ajax({
       type: "POST",
-      url: "php/searchPatients.php",
+      url: "newPatient.php",
       data: daten_neuerPatient,
       success: function(){
         document.getElementById("newPatientModalForm").reset();
         $('#newPatientModal').hide();
         $('#speicherung_erfolgreich_modal').modal({
-          backdrop: true,
+          backdrop: false,
           show: true,
           keyboard: true
         });
