@@ -64,6 +64,8 @@ $(document).ready(function(){
     //"Patienten-ID: ".selectedPatientID;
   });
 
+//Aktivieren aller Popover
+    $('[data-toggle="popover"]').popover();
 
 // //Test-Funktionen zum Ausprobieren der Funktionalität von jquery und css
 //   $("#patTable thead").dblclick(function(){
