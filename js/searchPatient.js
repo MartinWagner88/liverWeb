@@ -7,6 +7,8 @@
 
 //Kommunikation mit Datenbank nach https://www.w3schools.com/js/js_ajax_database.asp
 function updatePatTableBody(){
+  //nach oben scrollen
+  $('html, body').animate({scrollTop: 0},10);
   //Tabelle anzeigen
   $("#patTableDiv").css("display","block");
   $("#noPatientError").css("display","none");
@@ -64,6 +66,7 @@ $(document).ready(function(){
     $("#patReset").on("click",function(){
       $('#patTableDiv').css('display','none');
       $('#noPatientError').css('display','none');
+      $('html, body').animate({scrollTop: 0},10);
     });
 
 
