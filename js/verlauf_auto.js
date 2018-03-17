@@ -1,13 +1,72 @@
 function darstellung(){
 	var diagnosenGruppenArray = ['group_psc', 'group_hepatitis_B', 'group_leZi'];
 	var diagnosenCheckboxArray = ['psc_anzeige','hepB_anzeige','leZi_anzeige'];
-	var ergebnisArray = ['button_empfehlung','child_e','meld_e'];
 	for(i=0;i<diagnosenGruppenArray.length; i++){
 		if(document.getElementById(diagnosenCheckboxArray[i]).checked===true){
 			document.getElementById(diagnosenGruppenArray[i]).style.display='block';
-			document.getElementById(ergebnisArray[i]).classList.remove("disabled")}
-		else{document.getElementById(diagnosenGruppenArray[i]).style.display='none'}
+			if (i===1){document.getElementById('button_empfehlung').classList.remove("disabled")};
+			if (i===2){
+				document.getElementById('child_e').classList.remove("disabled");
+				document.getElementById('meld_e').classList.remove("disabled");
+			};
 		}
+		else{
+			document.getElementById(diagnosenGruppenArray[i]).style.display='none';
+			if (i===1){
+				disableBtn(document.getElementById('button_empfehlung'),"Hepatis-Therapie");
+				};
+			if (i===2){
+				disableBtn(document.getElementById('child_e'),"Child-Score");
+				disableBtn(document.getElementById('meld_e'),"MELD-Score");
+			};
+		};
+	}
+}
+
+function disableBtn(button,text){
+	button.classList.add("disabled","btn-basic");
+	button.classList.remove("btn-success","btn-danger","btn-warning");
+	button.innerHTML=text;
+	button.dataset.target="";
+}
+
+function warnBtn(button){
+	button.classList.add("btn-warning");
+	button.classList.remove("disabled","btn-success","btn-danger","btn-basic");
+	reDefineModal(button);
+}
+
+function succBtn(button){
+	button.classList.add("btn-success");
+	button.classList.remove("disabled","btn-danger","btn-basic","btn-warning");
+	reDefineModal(button);
+}
+
+function dangBtn(button){
+	button.classList.add("btn-danger");
+	button.classList.remove("disabled","btn-success","btn-basic","btn-warning");
+	reDefineModal(button);
+}
+
+function reDefineModal(button){
+	console.log("Input für reDefineModal: " + button);
+	console.log("Input für switch: " + button.id);
+	switch (button.id) {
+		case "button_empfehlung":
+			button.dataset.target='#antivirale_therapie_modal';
+			console.log("empf; " + button.dataset.target);
+			break;
+		case "child_e":
+			button.dataset.target='#child_modal';
+			console.log("child: " + button.dataset.target);
+			break;
+		case "meld_e":
+			button.dataset.target='#meld_modal';
+			console.log("meld_e; " + button.dataset.target);
+			break;
+		default: return "";
+
+	}
 }
 
 function formular_validierung(){
@@ -90,8 +149,8 @@ function kommentar_generieren(){
 	var cps=berechne_childPugh();
 	var ms=berechne_meld();
 	}else{
-		document.getElementById('child_e').style.display='none';
-		document.getElementById('meld_e').style.display='none';
+		document.getElementById('child_e').classList.add('disabled');
+		document.getElementById('meld_e').classList.add('disabled');
 	}
 
 	var wieVorEinheit_id=document.getElementById('wieVorEinheit');
@@ -128,11 +187,15 @@ function kommentar_generieren(){
 	}
 }
 
-if(indikation_hbv_therapie===true){
-	document.getElementById('button_empfehlung').innerHTML= "Eine antivirale Therapie ist prinzipiell indiziert.";
-}else{
-document.getElementById('button_empfehlung').innerHTML= "Keine Empfehlung!";
-}
+if(document.getElementById('hepB_anzeige').checked===true){
+	if(indikation_hbv_therapie===true){
+		document.getElementById('button_empfehlung').innerHTML= "Eine antivirale Therapie ist prinzipiell indiziert.";
+		dangBtn(document.getElementById('button_empfehlung'));
+	}else{
+		document.getElementById('button_empfehlung').innerHTML= "Aktuell ist keine antivirale Therapie indiziert.";
+		succBtn(document.getElementById('button_empfehlung'));
+		}
+	};
 document.getElementById('button_empfehlung').style.display='block';
 }
 
@@ -172,8 +235,28 @@ function berechne_childPugh(){
 	var childPughScore = parseInt(albumin)+parseInt(bili)+parseInt(inr)+parseInt(aszites_v)+parseInt(hepEnz_v);
 
 	var childPughScore_text ='Child-Pugh-Score: '+childPughScore;
-	document.getElementById('child_e').innerHTML=childPughScore_text;
-	document.getElementById('child_e').style.display='inline';
+	var childStadium;
+	if (document.getElementById('leZi_anzeige').checked===true){
+		if (childPughScore<7){
+			succBtn(document.getElementById('child_e'));
+			childStadium = "A";
+			childPughScore_text = "Child-" + childStadium + "-Zirrhose (Child-Pugh-Score: "+childPughScore+")";
+		} else{
+			if (childPughScore<10) {
+				warnBtn(document.getElementById('child_e'));
+				childStadium = "B";
+				childPughScore_text = "Child-" + childStadium + "-Zirrhose (Child-Pugh-Score: "+childPughScore+")";
+			} else {
+				dangBtn(document.getElementById('child_e'));
+				childStadium = "C";
+				childPughScore_text = "Child-" + childStadium + "-Zirrhose (Child-Pugh-Score: "+childPughScore+")";
+			};
+		};
+		document.getElementById('child_e').innerHTML=childPughScore_text;
+		document.getElementById('child_modal_p').innerHTML="Dieser Patient hat eine Child-" + childStadium +
+																											"-Zirrhose bei einem Child-Pugh-Score von " + childPughScore + ".";
+	}
+
 	document.getElementById('child_t').value=childPughScore;
 
 	return childPughScore;
@@ -194,12 +277,35 @@ function berechne_meld(){
 	var meld_score = Math.round(10*((0.378*Math.log(bili_v))+(1.12*Math.log(inr_v))+(0.957*Math.log(krea_v)+0.643)));
 
 	var meld_score_text='MELD-Score: '+meld_score;
+	var risikoHoehe;
+	var risikoLetal;
+if (document.getElementById('leZi_anzeige').checked===true){
+	console.log("LeZi_checked " + meld_score);
 	document.getElementById('meld_e').innerHTML=meld_score_text;
-	document.getElementById('meld_e').style.display='inline';
+	if (meld_score<20){
+		succBtn(document.getElementById('meld_e'));
+		risikoHoehe = "relativ geringes";
+		risikoLetal = "unter 6";
+	} else{
+		if (meld_score<40) {
+			warnBtn(document.getElementById('meld_e'));
+			risikoHoehe = "mittleres";
+			risikoLetal = "20-50";
+		} else {
+			dangBtn(document.getElementById('meld_e'));
+			risikoHoehe = "hohes";
+			risikoLetal = "über 70";
+		};
+	};
+	document.getElementById("meld_modal_p").innerHTML="Dieser Patient hat ein " + risikoHoehe + " Risiko. " +
+																					"Im Falle eines Krankenhausaufenthalts liegt die Wahrscheinlichkeit, innerhalb der nächsten 3 Monate zu versterben, bei " +
+																					risikoLetal +" Prozent (Quelle: <a target='_blank' href='https:/"+"/www.ncbi.nlm.nih.gov/pubmed/12512033'/><span class='glyphicon glyphicon-link'></span></a>).";
+	console.log(document.getElementById("meld_modal_p").innerHTML);
+}
+
 	document.getElementById('meld_t').value=meld_score;
 
 	return meld_score;
 }
 
 //Aktivieren der Buttons je nachdem, ob die Krankheiten ausgewählt sind
-	$('')
