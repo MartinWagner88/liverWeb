@@ -51,8 +51,8 @@
 // $einfuegen_leberfunktion="INSERT INTO leberfunktion (datum, child, meld, stammdaten_idstammdaten) VALUES ('$datum','$child', '$meld', '$id_stammdaten')";
 // $einfuegen_leberfunktion_ausfuehren=mysqli_query($verbindung, $einfuegen_leberfunktion) or die(" keine Übertragung in die Datenbank!");
 
-mysqli_close($verbindung);
-
+//mysqli_close($verbindung);
+$id_stammdaten = $_POST['patient'];
 
 $pdo = new PDO('mysql:host=localhost;dbname=liverweb', 'root', '');
 
