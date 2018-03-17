@@ -1,9 +1,11 @@
 function darstellung(){
 	var diagnosenGruppenArray = ['group_psc', 'group_hepatitis_B', 'group_leZi'];
 	var diagnosenCheckboxArray = ['psc_anzeige','hepB_anzeige','leZi_anzeige'];
+	var ergebnisArray = ['button_empfehlung','child_e','meld_e'];
 	for(i=0;i<diagnosenGruppenArray.length; i++){
 		if(document.getElementById(diagnosenCheckboxArray[i]).checked===true){
-			document.getElementById(diagnosenGruppenArray[i]).style.display='block'}
+			document.getElementById(diagnosenGruppenArray[i]).style.display='block';
+			document.getElementById(ergebnisArray[i]).classList.remove("disabled")}
 		else{document.getElementById(diagnosenGruppenArray[i]).style.display='none'}
 		}
 }
@@ -198,3 +200,6 @@ function berechne_meld(){
 
 	return meld_score;
 }
+
+//Aktivieren der Buttons je nachdem, ob die Krankheiten ausgewählt sind
+	$('')
