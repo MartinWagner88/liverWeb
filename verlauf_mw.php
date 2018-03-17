@@ -10,10 +10,10 @@
 
 
 
-<form action="verlauf_verarbeitung.php" method="post" class="form-group">
+<form id="formular_verlauf"  method="post" class="form-group">
 
 <div class="container-fluid">
-  <div class="row">
+  <!--<div class="row">
     <div class="well col-sm-12">
       <h4>Patientendaten</h4>
     </div>
@@ -40,6 +40,7 @@
       <label><input type="radio" name="geschlecht" value="m" checked="checked"/> m&auml;nnlich</label>
     </div>
   </div>
+-->
   <div class="row">
     <div class="well col-sm-12">
       <h4>Allgemeine Informationen</h4>
@@ -50,7 +51,7 @@
       <div class="">
         <label for="arzt">Arzt:</label>
       </div>
-      <select name="arzt">
+      <select name="arzt" id="arzt">
       <option label="Dr. Wagner">Dr. Wagner</option>
       <option label="Dr. Vetter">Dr. Vetter</option>
       </select>
@@ -248,7 +249,7 @@
       </div>
       <div class="">
         <button type="button" id="button_kommentar"class="btn btn-info btn-block" onclick="formular_validierung()"> Kommentar generieren</button>
-        <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-floppy-disk"></span> Speichern</button>
+        <button type="button" onclick="formular_ajax()" class="btn btn-success btn-block"><span class="glyphicon glyphicon-floppy-disk"></span> Speichern</button>
         <button type="reset" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-refresh"></span>  Zurücksetzen</button>
       </div>
     </div>
@@ -435,10 +436,11 @@ mg/dl</label>
 </textarea>
 </div> -->
 
-<!-- <div style="display:none">
-<input type="number" name="child_t" id="child_t"/>
-<input type="number" name="meld_t" id="meld_t"/>
-</div> -->
+<div style="display:none">
+<input type="hidden" name="child_t" id="child_t"/>
+<input type="hidden" name="meld_t" id="meld_t"/>
+<input type="hidden" name="id_patient_t" id="id_patient_t"/>
+</div>
 
 
 <!-- <button type="button" id="button_kommentar"class="btn btn-info" onclick="formular_validierung()"> Kommentar generieren</button><br/><br/> -->

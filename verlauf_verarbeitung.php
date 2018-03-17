@@ -9,8 +9,10 @@
 
 <?php
 
-$nachname=$_POST["nachname"];
-$vorname=$_POST["vorname"];
+//$nachname=$_POST["nachname"];
+//$vorname=$_POST["vorname"];
+
+//Übergabe der Variablen von AJAX
 $arzt=$_POST["arzt"];
 $kommentar=$_POST["kommentar_text"];
 $kgKG=$_POST["kgKG"];
@@ -23,15 +25,21 @@ $bilirubin=$_POST["bili"];
 $kreatinin=$_POST["krea"];
 $child=$_POST["child_t"];
 $meld=$_POST["meld_t"];
+$id_stammdaten=$_POST["id_patient_t"];
 
+
+//auslesen der aktuellenZeit und Datum
 $zeit = new DateTime();
 $datum = $zeit->format('Y-m-d H:i:s');
 
+//Datenbankzugriff
 include_once("db_connect.php");
 
 $verbindung = mysqli_connect($servername, $username, $password , $dbname)
 or die ("Fehler im System!");
 
+
+/*
 $auslesen_id="SELECT idstammdaten  FROM stammdaten WHERE nachname='$nachname' AND vorname='$vorname'";
 
 if($stmt=mysqli_prepare($verbindung, $auslesen_id)){
@@ -42,7 +50,9 @@ while (mysqli_stmt_fetch($stmt)){
 mysqli_stmt_close($stmt);
 }
 
+*/
 
+//Eintragen der Daten in die Datenbank
 $einfuegen_bericht="INSERT INTO bericht (datum, arzt, kommentar, stammdaten_idstammdaten) VALUES ('$datum','$arzt', '$kommentar','$id_stammdaten')";
 $einfuegen_bericht_ausfuehren=mysqli_query($verbindung, $einfuegen_bericht) or die(" keine Übertragung in die Datenbank!_1");
 $einfuegen_laborwerte="INSERT INTO laborwerte (datum, gpt, albumin, bilirubin, inr, kreatinin, hbv_dna, stammdaten_idstammdaten) VALUES ('$datum', '$gpt', '$albumin', '$bilirubin', '$inr', '$kreatinin', '$hbv_dna','$id_stammdaten')";

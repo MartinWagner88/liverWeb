@@ -21,6 +21,7 @@ if(!isset($_SESSION['user_session'])){
     <!--Java-Script-Dateien -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+
   </head>
   <body>
 
@@ -207,6 +208,7 @@ if(!isset($_SESSION['user_session'])){
 	<script src="js/diagramm_laden.js"></script>
 	<script  src="js/verlauf_auto.js"></script>
 	<script  src="js/slider.js"></script>
+	<script  src="js/verlauf_speichern.js"></script>
 
 <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script> -->
 
