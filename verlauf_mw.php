@@ -4,8 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <title>Verlauf erstellen</title>
-<script  src="js/verlauf_auto.js" async></script>
-<script  src="js/slider.js" async></script>
 </head>
 
 <body>
