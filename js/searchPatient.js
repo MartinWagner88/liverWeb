@@ -1,6 +1,7 @@
 
 // Defining global variables
   var selectedPatientID;
+  var selectedPatientGe;
   var testCounter = 0;
 
 
@@ -27,7 +28,7 @@ function updatePatTableBody(){
   };
   xhttp.open("POST","php/searchPatients.php",true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send(formDatad);
+  xhttp.send(formData);
 }
 
 function choosePatient(){
@@ -56,8 +57,10 @@ $(document).ready(function(){
     $("#patTable tbody tr").css("background-color","white");
     //Einfärben der gewählten Zeile
     $(this).css("background-color","#cccccc");
-    var selectedPatientID = this.id.slice(3);
+    selectedPatientID = this.id.slice(3);
+    selectedPatientGe = this.cells[3].innerHTML;
     $("#patNumberDisplay").html('Patienten-ID: ' + selectedPatientID);
+    diagramm_laden_funktion('meld', selectedPatientID);
     //"Patienten-ID: ".selectedPatientID;
   });
 

@@ -1,11 +1,12 @@
-function diagramm_laden_funktion(labor_parameter){
-
-var patienten_id = 16;
+function diagramm_laden_funktion(labor_parameter, selectedPatientID){
+console.log(selectedPatientID);
+//var patienten_id = 16;
+//selectedPatientID
 
          $.ajax({
               type: 'POST',
               url: 'diagramm_db.php',
-              data: {parameter: labor_parameter, patient: patienten_id},
+              data: {parameter: labor_parameter, patient: selectedPatientID},
               dataType: 'json',
               success: function(result) {
                 var zeitenDiagramm = [result.length];

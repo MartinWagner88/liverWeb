@@ -62,8 +62,9 @@ function kommentar_generieren(){
 }
 
   function kommentar_ausfuehren(verlauf){
-
-  	var geschlecht_v =getValue_radioButton('geschlecht');
+	var geschlecht_v = selectedPatientGe;
+	//alert (typeof(selectedPatientGe));
+	//var geschlecht_v =getValue_radioButton('geschlecht');
 	var az_v =getValue_radioButton('az');
 	var pruritus_v = document.getElementById('pruritus').value;
 	if (pruritus_v == 0){var pruritus_k="p0"}else{var pruritus_k="p1"};
