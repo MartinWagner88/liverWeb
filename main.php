@@ -81,30 +81,26 @@ if(!isset($_SESSION['user_session'])){
           <h4 class="modal-title">Neuen Patienten anlegen</h4>
         </div>
         <div class="modal-body">
-          <form class="" action="newPatient.php" method="post">
+          <form id="newPatientModalForm" class="" action="newPatient.php" method="post">
             <div class="form-group">
               <label for="nachname">Nachname:</label>
-              <input type="text" class="form-control" id="nachname" name="nachname" placeholder="Nachname">
+              <input type="text" class="form-control" id="nachname_m" name="nachname_m" placeholder="Nachname">
             </div>
             <div class="form-group">
               <label for="vorname">Vorname:</label>
-              <input type="text" class="form-control" id="vorname" name="vorname" placeholder="Vorname">
+              <input type="text" class="form-control" id="vorname_m" name="vorname_m" placeholder="Vorname">
             </div>
             <div class="form-group">
               <label for="geburtsdatum">Geburtsdatum:</label>
-              <input type="date" class="form-control" id="geburtsdatum" name="geburtsdatum" min="1900-01-01" placeholder="Geburtsdatum">
-            </div>
-            <div class="form-group">
-              <label for="diagnose">Diagnose:</label>
-              <input type="text" class="form-control" id="diagnose" name="diagnose" placeholder="Diagnose">
+              <input type="date" class="form-control" id="geburtsdatum_m" name="geburtsdatum_m" min="1900-01-01" placeholder="Geburtsdatum">
             </div>
             <div class="form-group">
               <label for="geschlecht">Geschlecht:</label>
               <br>
-              <label class="radio-inline"><input type="radio" id="geschlecht-m" name="geschlecht" value="m" checked>männlich</label>
-              <label class="radio-inline"><input type="radio" id="geschlecht-w" name="geschlecht" value="w">weiblich</label>
+              <label class="radio-inline"><input type="radio" id="geschlecht-m" name="geschlecht_m" value="m" checked>männlich</label>
+              <label class="radio-inline"><input type="radio" id="geschlecht-w" name="geschlecht_m" value="w">weiblich</label>
             </div>
-            <button type="submit" class="btn btn-success btn-block">Bestätigen</button>
+            <button type="button" onclick="formular_ajax_neuerPatient()"class="btn btn-success btn-block " data-dismiss="modal">Bestätigen</button>
           </form>
         </div>
         <div class="modal-footer">
