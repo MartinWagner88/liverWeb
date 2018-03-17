@@ -148,7 +148,7 @@ if(!isset($_SESSION['user_session'])){
  <div class="tab-content">
    <div id="Verlaufseintrag-Tab" class="tab-pane fade">
 		 <?php
-		 include "verlauf_mw.php";
+		 include "eingabe.php";
 		 ?>
    </div>
 	 <div id="Verlauf-Tab" class="tab-pane fade">
