@@ -137,12 +137,12 @@ if(!isset($_SESSION['user_session'])){
 	</div>
 
 
-<div class="container-fluid"></div>
+<div id="lowerNavbarContainer" class="container-fluid"></div>
 
  <ul class="nav nav-tabs nav-justified navbar-inverse">
-   <li><a data-toggle="tab" href="#Verlaufseintrag-Tab"><span class="glyphicon glyphicon-list-alt"></span> Verlaufs-Eintrag</a></li>
-	 <li><a data-toggle="tab" href="#Verlauf-Tab"><span class="glyphicon glyphicon-th-list"></span> Verlauf gesamt</a></li>
-   <li><a data-toggle="tab" href="#Labor-Tab"><span class="glyphicon glyphicon-stats"></span> Labor</a></li>
+   <li><a id="Verlaufseintrag-Nav" data-toggle="tab" href="#Verlaufseintrag-Tab"><span class="glyphicon glyphicon-list-alt"></span> Verlaufs-Eintrag</a></li>
+	 <li><a id="Verlauf-Nav" data-toggle="tab" href="#Verlauf-Tab"><span class="glyphicon glyphicon-th-list"></span> Verlauf gesamt</a></li>
+   <li><a id="Labor-Nav" data-toggle="tab" href="#Labor-Tab"><span class="glyphicon glyphicon-stats"></span> Labor</a></li>
  </ul>
 
  <div class="tab-content">
@@ -151,17 +151,17 @@ if(!isset($_SESSION['user_session'])){
 		 include "eingabe.php";
 		 ?>
    </div>
+	 <div id="Labor-Tab" class="tab-pane fade">
+		<?php
+		include "diagramm.php";
+		?>
+	 </div>
 	 <div id="Verlauf-Tab" class="tab-pane fade">
 		 <?php
 		 include "verlauf_gesamt.php";
 		 ?>
    </div>
-   <div id="Labor-Tab" class="tab-pane fade">
-		 <?php
-		 include "diagramm.php";
-		 ?>
-		 <!-- <iframe src="diagramm.php" width="100%" height="100%" style="border:none;position:absolute"></iframe> -->
-   </div>
+
  </div>
 
 
@@ -171,9 +171,10 @@ if(!isset($_SESSION['user_session'])){
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
 	<script src="js/searchPatient.js"></script>
 	<script src="js/diagramm_laden.js"></script>
-	<script  src="js/verlauf_auto.js"></script>
-	<script  src="js/slider.js"></script>
-	<script  src="js/verlauf_speichern.js"></script>
+	<script src="js/verlauf_auto.js"></script>
+	<script src="js/slider.js"></script>
+	<script src="js/verlauf_speichern.js"></script>
+	<script src="js/misc.js"></script>
 
 <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script> -->
 
