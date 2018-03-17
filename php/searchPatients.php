@@ -1,11 +1,10 @@
-<!-- Datenbankanbindung nach https://www.w3schools.com/php/php_mysql_select.asp -->
 <?php
+// Datenbankanbindung nach https://www.w3schools.com/php/php_mysql_select.asp
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
   if(isset($_POST["nachname"])){$nachname = test_input($_POST["nachname"]);}
   if(isset($_POST["vorname"])){$vorname = test_input($_POST["vorname"]);}
   if(isset($_POST["geburtsdatum"])){$geburtsdatum = test_input($_POST["geburtsdatum"]);}
-  if(isset($_POST["berichtDatum"])){$bericht = test_input($_POST["berichtDatum"]);}
 }
 
 function test_input($data) {
@@ -65,7 +64,7 @@ try {
         // set the resulting array to associative
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $counter=TRUE;
-        echo "<form> <br>";
+        //echo "<form> <br>";
         foreach($stmt->fetchAll() as $value){
         //foreach($result as $x->$y){
           echo "<tr id=tr_".$value["idstammdaten"].">
@@ -75,7 +74,7 @@ try {
                   <td>".$value["geschlecht"]."</td>
                 </tr>
           ";
-        echo "</form>";
+        //echo "</form>";
         }
      }
      catch(PDOException $e)
