@@ -7,47 +7,34 @@
 
 //Kommunikation mit Datenbank nach https://www.w3schools.com/js/js_ajax_database.asp
 function updatePatTableBody(){
+  //Tabelle anzeigen
+  $("#patTableDiv").css("display","block");
+  $("#noPatientError").css("display","none");
   // Auslesen der Daten aus dem Formular per id
   var nachname = document.getElementById('nachname').value;
   var vorname = document.getElementById('vorname').value;
   var geburtsdatum = document.getElementById('geburtsdatum').value;
-  var berichtDatum = document.getElementById('berichtDatum').value;
 
   // Erstellen einer Variable mit key-value-Paaren, die an die Datenbank geschickt wird
   var  formData = 'nachname=' + nachname +
                      '&vorname=' + vorname +
-                     '&geburtsdatum=' + geburtsdatum +
-                     '&berichtDatum=' + berichtDatum;
+                     '&geburtsdatum=' + geburtsdatum;
   var xhttp;
-      document.getElementById('patTable_Body').innerHTML = formData;
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function(){
     if (this.readyState == 4 && this.status == 200){
+      if (!this.response){
+        $("#patTableDiv").css("display","none");
+        $("#noPatientError").css("display","inline");
+      } else {
       document.getElementById('patTable_Body').innerHTML = this.responseText;
+      }
     }
   };
   xhttp.open("POST","php/searchPatients.php",true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send(formData);
 }
-
-function choosePatient(){
-
-}
-
-// $(document).ready(function(){
-//   $("thead").click(function(){
-//       $("tbody").css("background-color","red");
-//       console.log("TEST" + testCounter);
-//       testCounter =+ 1;
-//   });
-//
-//   $('#patTable tr').click(function(){
-//     console.log("Funktion 2");
-//     $("thead").css("background-color","green");
-//     $("tbody").css("background-color","green");
-//   });
-// });
 
 $(document).ready(function(){
 
@@ -59,32 +46,23 @@ $(document).ready(function(){
     $(this).css("background-color","#cccccc");
     selectedPatientID = this.id.slice(3);
     selectedPatientGe = this.cells[3].innerHTML;
-    $("#patNumberDisplay").html('Patienten-ID: ' + selectedPatientID);
     diagramm_laden_funktion('meld', selectedPatientID);
-    //"Patienten-ID: ".selectedPatientID;
   });
 
-//Aktivieren aller Popover
+    //Aktivieren aller Popover
     $('[data-toggle="popover"]').popover();
 
-// //Test-Funktionen zum Ausprobieren der Funktionalität von jquery und css
-//   $("#patTable thead").dblclick(function(){
-//     $("#patTable tbody tr:nth-of-type(3)").css("background-color","blue");
-//     console.log("3rd row blue; "+testCounter);
-//     testCounter += 1;
-//   });
-//
-//   $("#patTable thead").mouseenter(function(){
-//     $("#patTable").css("background-color","green");
-//     console.log("Table-Background green; "+testCounter);
-//     testCounter += 1;
-//   });
-//
-//   $("#patTable").dblclick(function(){
-//     $("#patTable").css("background-color","red");
-//     console.log("Background red; " + testCounter);
-//     testCounter += 1;
-//   });
+    //Anpassen des Spacing hinter der Fixed-Navbar, um Überlappung zu vermeiden
+    $(window).resize(function(){
+      var navbarHeight = $("#mainNavbar").css("height");
+      $("#patTableContainer").css("margin-top",navbarHeight);
+    });
+
+    //Beim Klicken des Reset-Buttons Tabelle verschwinden lassen
+    $("#patReset").on("click",function(){
+      $('#patTableDiv').css('display','none');
+      $('#noPatientError').css('display','none');
+    });
 
 
 

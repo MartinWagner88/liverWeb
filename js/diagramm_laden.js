@@ -1,7 +1,4 @@
 function diagramm_laden_funktion(labor_parameter, selectedPatientID){
-console.log(selectedPatientID);
-//var patienten_id = 16;
-//selectedPatientID
 
          $.ajax({
               type: 'POST',
@@ -16,9 +13,6 @@ console.log(selectedPatientID);
                   datenDiagramm[i]=result[i][1];
                 }
                 diagramm_anzeigen_funktion(zeitenDiagramm, datenDiagramm, labor_parameter);
-              console.log(zeitenDiagramm[5]);
-                  //$('#ergebnisInhalt').html(result[0]);
-
               }
           });
 }
