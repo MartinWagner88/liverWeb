@@ -165,7 +165,7 @@ if(!isset($_SESSION['user_session'])){
  <div class="tab-content">
    <div id="Verlaufseintrag-Tab" class="tab-pane fade">
 		 <?php
-		 include "verlauf.php";
+		 //include "verlauf.php";
 		 ?>
    <!-- <iframe src="verlauf.html" width="100%" height="100%" style="border:none;position:absolute"></iframe> -->
    </div>
