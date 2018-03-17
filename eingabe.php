@@ -274,6 +274,8 @@
   </div>
 </div>
 
+
+
 <!-- <p>
 
 <h4>Patientendaten</h4>
@@ -452,6 +454,20 @@ mg/dl</label>
 <button type="reset" class="btn btn-danger"><span class="glyphicon glyphicon-refresh"></span>  Zurücksetzen</button> -->
 
 </form>
+
+<div id="speicherung_erfolgreich_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Die Daten wurden erfolgreich gespeichert.</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 </body>
