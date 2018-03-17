@@ -1,10 +1,10 @@
 <!-- Datenbankanbindung nach https://www.w3schools.com/php/php_mysql_insert.asp -->
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-  if(isset($_POST["nachname"])){$nachname = test_input($_POST["nachname"]);}
-  if(isset($_POST["vorname"])){$vorname = test_input($_POST["vorname"]);}
-  if(isset($_POST["geburtsdatum"])){$geburtsdatum = test_input($_POST["geburtsdatum"]);}
-  if(isset($_POST["geschlecht"])){$geschlecht = test_input($_POST["geschlecht"]);}
+  if(isset($_POST["nachname_m"])){$nachname = test_input($_POST["nachname_m"]);}
+  if(isset($_POST["vorname_m"])){$vorname = test_input($_POST["vorname_m"]);}
+  if(isset($_POST["geburtsdatum_m"])){$geburtsdatum = test_input($_POST["geburtsdatum_m"]);}
+  if(isset($_POST["geschlecht_m"])){$geschlecht = test_input($_POST["geschlecht_m"]);}
 }
 
 function test_input($data) {
