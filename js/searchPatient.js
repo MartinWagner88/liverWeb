@@ -51,7 +51,7 @@ $(document).ready(function(){
     diagramm_laden_funktion('meld', selectedPatientID);
   });
 
-//Aktivieren aller Popover
+    //Aktivieren aller Popover
     $('[data-toggle="popover"]').popover();
 
     //Anpassen des Spacing hinter der Fixed-Navbar, um Überlappung zu vermeiden

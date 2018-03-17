@@ -10,10 +10,10 @@
 
 
 
-<form action="verlauf_verarbeitung.php" method="post" class="form-group">
+<form id="formular_verlauf"  method="post" class="form-group">
 
 <div class="container-fluid">
-  <div class="row">
+  <!--<div class="row">
     <div class="well col-sm-12">
       <h4>Patientendaten</h4>
     </div>
@@ -40,6 +40,7 @@
       <label><input type="radio" name="geschlecht" value="m" checked="checked"/> m&auml;nnlich</label>
     </div>
   </div>
+-->
   <div class="row">
     <div class="well col-sm-12">
       <h4>Allgemeine Informationen</h4>
@@ -50,7 +51,7 @@
       <div class="">
         <label for="arzt">Arzt:</label>
       </div>
-      <select name="arzt">
+      <select name="arzt" id="arzt">
       <option label="Dr. Wagner">Dr. Wagner</option>
       <option label="Dr. Vetter">Dr. Vetter</option>
       </select>
@@ -192,9 +193,7 @@
             <div class="form-group">
               <div class="">
                 <label for="dialyse">Dialyse:</label>
-                <a data-toggle="popover" title="" data-trigger="hover" data-content="Wurde der Patient in der letzten Woche mindestens zweimal dialysiert?">
-                  <span class="glyphicon glyphicon-question-sign"></span>
-                </a>
+                <a data-toggle="popover" title="" data-content="Wurde der Patient in der letzten Woche mindestens zweimal dialysiert?"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <!-- <a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a> -->
 
               </div>
@@ -250,7 +249,7 @@
       </div>
       <div class="">
         <button type="button" id="button_kommentar"class="btn btn-info btn-block" onclick="formular_validierung()"> Kommentar generieren</button>
-        <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-floppy-disk"></span> Speichern</button>
+        <button type="button" onclick="formular_ajax()" class="btn btn-success btn-block"><span class="glyphicon glyphicon-floppy-disk"></span> Speichern</button>
         <button type="reset" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-refresh"></span>  Zurücksetzen</button>
       </div>
     </div>
@@ -438,8 +437,9 @@ mg/dl</label>
 </div> -->
 
 <div style="display:none">
-<input type="number" name="child_t" id="child_t"/>
-<input type="number" name="meld_t" id="meld_t"/>
+<input type="hidden" name="child_t" id="child_t"/>
+<input type="hidden" name="meld_t" id="meld_t"/>
+<input type="hidden" name="id_patient_t" id="id_patient_t"/>
 </div>
 
 
