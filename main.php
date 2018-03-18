@@ -137,7 +137,7 @@ if(!isset($_SESSION['user_session'])){
 
  <ul class="nav nav-tabs nav-justified navbar-inverse">
    <li><a id="Verlaufseintrag-Nav" data-toggle="tab" href="#Verlaufseintrag-Tab"><span class="glyphicon glyphicon-list-alt"></span> Verlaufs-Eintrag</a></li>
-	 <li><a id="Verlauf-Nav" data-toggle="tab" href="#Verlauf-Tab"><span class="glyphicon glyphicon-th-list"></span> Verlauf gesamt</a></li>
+	 <li onclick="verlauf_laden_funktion(selectedPatientID)"><a id="Verlauf-Nav" data-toggle="tab" href="#Verlauf-Tab"><span class="glyphicon glyphicon-th-list"></span> Verlauf gesamt</a></li>
    <li><a id="Labor-Nav" data-toggle="tab" href="#Labor-Tab"><span class="glyphicon glyphicon-stats"></span> Labor</a></li>
  </ul>
 
@@ -171,6 +171,7 @@ if(!isset($_SESSION['user_session'])){
 	<script src="js/slider.js"></script>
 	<script src="js/verlauf_speichern.js"></script>
 	<script src="js/misc.js"></script>
+	<script src="js/verlauf_laden.js"></script>
 
 <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script> -->
 
