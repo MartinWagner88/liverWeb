@@ -3,7 +3,7 @@
   var selectedPatientID;
   var selectedPatientGe;
   var testCounter = 0;
-
+  var activeTab;
 
 //Kommunikation mit Datenbank nach https://www.w3schools.com/js/js_ajax_database.asp
 function updatePatTableBody(){
@@ -38,6 +38,30 @@ function updatePatTableBody(){
   xhttp.send(formData);
 }
 
+function updateLowerTab(selectedPatientID){
+  var aktiverTab = activeTab;
+    case " Labor":
+      // $("#meldButton,#pruritusButton,#gptButton,#hbvButton").function(){
+      //   console.log(this.text());
+      //   //if (this.
+      // };
+      break;
+    case " Verlauf":
+      console.log("Verlauf gewählt");
+      break;
+    case " Verlaufseintrag":
+      console.log("Verlaufseintrag gewhätl");
+      break;
+    default: console.log("nix gewählt");
+  };
+      // if ($('#Verlauf-Tab').css('display')==='inline'){
+      //   verlauf_laden_funktion(selectedPatientID);
+      // };
+      // if ($('Labor-Tab').css('display')==='inline'){
+      //
+      // }
+}
+
 $(document).ready(function(){
 
 //Auswahl eines Patienten aus PatientTable nach Suche
@@ -46,15 +70,18 @@ $(document).ready(function(){
     $("#patTable tbody tr").css("background-color","white");
     //Einfärben der gewählten Zeile
     $(this).css("background-color","#cccccc");
+    //Daten des gewählten Patienten an globale Variable übergeben
     selectedPatientID = this.id.slice(3);
     selectedPatientGe = this.cells[3].innerHTML;
     document.getElementById('id_patient_t').value=selectedPatientID;
-    $("#patNumberDisplay").html('Patienten-ID: ' + selectedPatientID);
-    diagramm_laden_funktion('meld', selectedPatientID);
+    //Verstecken der verlaufNoPatient-Warnung
+    $("#verlaufNoPatient").css("display","none");
+    //Gewählten Tab mit dem gewählten Patienten aktualisieren
+    updateLowerTab(selectedPatientID);
   });
 
     //Aktivieren aller Popover
-    $('[data-toggle="popover"]').popover();
+//    $('[data-toggle="popover"]').popover();
 
     //Anpassen des Spacing hinter der Fixed-Navbar, um Überlappung zu vermeiden
     $(window).resize(function(){
@@ -64,12 +91,10 @@ $(document).ready(function(){
 
     //Beim Klicken des Reset-Buttons Tabelle verschwinden lassen
     $("#patReset").on("click",function(){
+      selectedPatientID = null;
       $('#patTableDiv').css('display','none');
       $('#noPatientError').css('display','none');
       $('html, body').animate({scrollTop: 0},10);
+      tabsAusblenden();
     });
-
-
-
-
 });

@@ -1,11 +1,11 @@
 verlauf_LeZi={
 	"geschlecht":{
-		"w":"Die Patientin", 
-		"m":"Der Patient"
+		"w":"Die Patientin",
+		"m":"Der Patient",
 	},
 	"pruritus":{
 		"0": "vereint das Vorliegen von Pruritus. ",
-		"1": "berichtet von Pruritus (Intensität:  ", 
+		"1": "berichtet von Pruritus (Intensität:  ",
 	},
 	"allgemeinzustand":{
 		"gut":"gutem Allgemeinzustand",

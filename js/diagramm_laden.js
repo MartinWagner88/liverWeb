@@ -32,18 +32,28 @@ function diagramm_anzeigen_funktion(zeitenDiagramm, datenDiagramm, labor_paramet
           var beschriftungDiagramm ='Wert im Verlauf';
   }
 
-const CHART =document.getElementById("Diagramm");
+  const CHART =document.getElementById("Diagramm");
 
-let pruritusDiagramm = new Chart(CHART, {
-	type:'line',
- 	data: {
-        labels: zeitenDiagramm,
-        datasets: [{
-            label: beschriftungDiagramm,
-			fill: false,
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: datenDiagramm
-        }]
-    }});
-  }
+  let pruritusDiagramm = new Chart(CHART, {
+  	type:'line',
+   	data: {
+          labels: zeitenDiagramm,
+          datasets: [{
+              label: beschriftungDiagramm,
+  			      fill: false,
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: datenDiagramm
+              }]
+          }
+    });
+
+  $('html, body').animate({scrollTop: $(document).height()}, 0);
+  console.log("Heruntergescrollt!" + Date.now());
+
+}
+
+function activateDiagramButton(button){
+  $("#meldButton,#pruritusButton,#gptButton,#hbvButton").removeClass("active");
+  $('#' + button).addClass("active");
+}
