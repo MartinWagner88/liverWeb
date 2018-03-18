@@ -5,16 +5,15 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <title>Unbenanntes Dokument</title>
-<title>Unbenanntes Dokument</title>
 </head>
 
 <body>
 
 <div class="btn-group btn-group-justified">
-  <a href="#" class="btn btn-primary" id="meld" onClick="diagramm_laden_funktion('meld', selectedPatientID)">MELD</a>
-  <a href="#" class="btn btn-primary"id="pruritus"  onClick="diagramm_laden_funktion('pruritus_intensitaet', selectedPatientID)">Pruritus</a>
-  <a href="#" class="btn btn-primary" id="gpt"  onClick="diagramm_laden_funktion('gpt', selectedPatientID)">GPT</a>
-    <a href="#" class="btn btn-primary" id="hbv"  onClick="diagramm_laden_funktion('hbv_dna', selectedPatientID)">HBV-DNA</a>
+  <a href="#" class="btn btn-default" id="meldButton" onClick="activateDiagramButton(this.id)">MELD</a>
+  <a href="#" class="btn btn-default" id="pruritusButton"  onClick="activateDiagramButton(this.id)">Pruritus</a>
+  <a href="#" class="btn btn-default" id="gptButton"  onClick="activateDiagramButton(this.id)">GPT</a>
+    <a href="#" class="btn btn-default" id="hbvButton"  onClick="activateDiagramButton(this.id)">  HBV-DNA</a>
 </div>
 
 <div style="width:50%; height: 50%">

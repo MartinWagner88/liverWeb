@@ -32,18 +32,43 @@ function diagramm_anzeigen_funktion(zeitenDiagramm, datenDiagramm, labor_paramet
           var beschriftungDiagramm ='Wert im Verlauf';
   }
 
-const CHART =document.getElementById("Diagramm");
+  const CHART =document.getElementById("Diagramm");
 
-let pruritusDiagramm = new Chart(CHART, {
-	type:'line',
- 	data: {
-        labels: zeitenDiagramm,
-        datasets: [{
-            label: beschriftungDiagramm,
-			fill: false,
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: datenDiagramm
-        }]
-    }});
+  let pruritusDiagramm = new Chart(CHART, {
+  	type:'line',
+   	data: {
+          labels: zeitenDiagramm,
+          datasets: [{
+              label: beschriftungDiagramm,
+  			      fill: false,
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: datenDiagramm
+              }]
+          }
+    });
+
+  $('html, body').animate({scrollTop: $(document).height()}, 0);
+  console.log("Heruntergescrollt!" + Date.now());
+
+}
+
+function activateDiagramButton(button){
+  $("#meldButton,#pruritusButton,#gptButton,#hbvButton").removeClass("active");
+  $('#' + button).addClass("active");
+  switch (button) {
+    case "meldButton":
+      diagramm_laden_funktion('meld', selectedPatientID);
+      break;
+    case "pruritusButton":
+      diagramm_laden_funktion('pruritus_intensitaet', selectedPatientID);
+      break;
+    case "gptButton":
+      diagramm_laden_funktion('gpt', selectedPatientID);
+      break;
+    case "hbvButton":
+      diagramm_laden_funktion('hbv_dna', selectedPatientID)
+      break;
+    default:
   }
+}

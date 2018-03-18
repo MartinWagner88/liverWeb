@@ -23,7 +23,6 @@ if(!isset($_SESSION['user_session'])){
     <!--Java-Script-Dateien -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-
   </head>
   <body>
 
@@ -116,6 +115,16 @@ if(!isset($_SESSION['user_session'])){
 			<strong>Achtung!</strong> Kein Patient mit den angegebenen Merkmalen gefunden.
 			</div>
 		</div>
+		<div id="verlaufNoPatient" class="container" style="display:none">
+			<div class="alert alert-danger text-center">
+			<strong>Achtung!</strong> Es wurde kein Patient ausgewählt!.
+			</div>
+		</div>
+		<div id="keinEintrag" class="container" style="display:none">
+			<div class="alert alert-danger text-center">
+			<strong>Achtung!</strong> Für diesen Patienten existiert kein Verlaufseintrag!.
+			</div>
+		</div>
 	  <div id="patTableDiv" class="table-responsive" style="width:95%;margin: 0 auto;display:none">
 	    <table id="patTable" class="table table-hover">
 	      <thead>
@@ -136,30 +145,27 @@ if(!isset($_SESSION['user_session'])){
 <div id="lowerNavbarContainer" class="container-fluid"></div>
 
  <ul class="nav nav-tabs nav-justified navbar-inverse">
-   <li><a id="Verlaufseintrag-Nav" data-toggle="tab" href="#Verlaufseintrag-Tab"><span class="glyphicon glyphicon-list-alt"></span> Verlaufs-Eintrag</a></li>
-	 <li onclick="verlauf_laden_funktion(selectedPatientID)"><a id="Verlauf-Nav" data-toggle="tab" href="#Verlauf-Tab"><span class="glyphicon glyphicon-th-list"></span> Verlauf gesamt</a></li>
+   <li><a id="Verlaufseintrag-Nav" data-toggle="tab" href="#Verlaufseintrag-Tab"><span class="glyphicon glyphicon-list-alt"></span> Verlaufseintrag</a></li>
+	 <li><a id="Verlauf-Nav" data-toggle="tab" href="#Verlauf-Tab"><span class="glyphicon glyphicon-th-list"></span> Verlauf</a></li>
    <li><a id="Labor-Nav" data-toggle="tab" href="#Labor-Tab"><span class="glyphicon glyphicon-stats"></span> Labor</a></li>
  </ul>
-
  <div class="tab-content">
-   <div id="Verlaufseintrag-Tab" class="tab-pane fade">
+   <div id="Verlaufseintrag-Tab" class="tab-pane fade" style="display:inline">
 		 <?php
 		 include "eingabe.php";
 		 ?>
    </div>
-	 <div id="Labor-Tab" class="tab-pane fade">
-		<?php
-		include "diagramm.php";
-		?>
+	 <div id="Labor-Tab" class="tab-pane fade" style="display:inline">
+		 <?php
+		 include "diagramm.php";
+		 ?>
 	 </div>
-	 <div id="Verlauf-Tab" class="tab-pane fade">
+	 <div id="Verlauf-Tab" class="tab-pane fade" style="display:inline">
 		 <?php
 		 include "verlauf_gesamt.php";
 		 ?>
    </div>
-
  </div>
-
 
   <!-- Bootstrap javascript. jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
