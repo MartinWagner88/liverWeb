@@ -56,4 +56,19 @@ function diagramm_anzeigen_funktion(zeitenDiagramm, datenDiagramm, labor_paramet
 function activateDiagramButton(button){
   $("#meldButton,#pruritusButton,#gptButton,#hbvButton").removeClass("active");
   $('#' + button).addClass("active");
+  switch (button) {
+    case "meldButton":
+      diagramm_laden_funktion('meld', selectedPatientID);
+      break;
+    case "pruritusButton":
+      diagramm_laden_funktion('pruritus_intensitaet', selectedPatientID);
+      break;
+    case "gptButton":
+      diagramm_laden_funktion('gpt', selectedPatientID);
+      break;
+    case "hbvButton":
+      diagramm_laden_funktion('hbv_dna', selectedPatientID)
+      break;
+    default:
+  }
 }

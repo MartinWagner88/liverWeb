@@ -40,17 +40,16 @@ function updatePatTableBody(){
 
 function updateLowerTab(selectedPatientID){
   var aktiverTab = activeTab;
+  switch (aktiverTab) {
     case " Labor":
-      // $("#meldButton,#pruritusButton,#gptButton,#hbvButton").function(){
-      //   console.log(this.text());
-      //   //if (this.
-      // };
+      activateDiagramButton("meldButton");
       break;
     case " Verlauf":
-      console.log("Verlauf gewählt");
+      verlauf_laden_funktion(selectedPatientID, true);
       break;
     case " Verlaufseintrag":
-      console.log("Verlaufseintrag gewhätl");
+      verlaufTesten("Verlaufseintrag-Tab");
+      //Marcel123 -> Todo
       break;
     default: console.log("nix gewählt");
   };

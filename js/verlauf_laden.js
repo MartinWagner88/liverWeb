@@ -1,5 +1,5 @@
 	function verlauf_laden_funktion(selPatID, verlaufGetestet){
-	//		if (verlaufGetestet){
+			if (verlaufGetestet){
 				var PatIDTrans='patient='+selPatID;
 	      var xhttp;
 	      xhttp = new XMLHttpRequest();
@@ -18,7 +18,7 @@
 	      xhttp.open("POST","verlauf_gesamt_db.php",true);
 	      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	      xhttp.send(PatIDTrans);
-		//	};
+			};
 	};
 
 /*
