@@ -83,6 +83,12 @@ function formular_validierung(){
 	if (validationOk===false ||validAlbumin ===false||validInr ===false||validBili ===false||validKrea ===false){validationOk=false};
 	}
 
+	if(document.getElementById('hepB_anzeige').checked===true){
+	var validGpt=feld_leer('gpt');
+	var validHbv_dna=feld_leer('hbv_dna');
+	if (validationOk===false ||validGpt ===false||validHbv_dna ===false){validationOk=false};
+	}
+
 	var validWieVorZahl=feld_leer('wieVorZahl');
 	if (validationOk===false ||validWieVorZahl ===false){validationOk=false};
 

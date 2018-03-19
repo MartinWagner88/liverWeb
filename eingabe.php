@@ -23,10 +23,8 @@
       <div class="">
         <label for="arzt">Arzt:</label>
       </div>
-      <select name="arzt" id="arzt">
-      <option label="Dr. Wagner">Dr. Wagner</option>
-      <option label="Dr. Vetter">Dr. Vetter</option>
-      </select>
+      <input type="hidden" name="arzt" id="arzt" value="<?php echo $nutzer['titel']." ".substr($nutzer['vorname'],0,1).". ".$nutzer['nachname'] ?>">
+      <span><?php echo $nutzer['titel']." ".substr($nutzer['vorname'],0,1).". ".$nutzer['nachname'] ?></span>
     </div>
     <div class="col-sm-3">
       <div class="form-group">
@@ -222,18 +220,20 @@
       <div class="">
         <button type="button" id="button_kommentar"class="btn btn-info btn-block" onclick="formular_validierung()"> Kommentar generieren</button>
         <button type="button" onclick="formular_ajax()" class="btn btn-success btn-block"><span class="glyphicon glyphicon-floppy-disk"></span> Speichern</button>
-        <button type="reset" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-refresh"></span>  Zurücksetzen</button>
+        <button type="button" onclick="formular_eingabe_reset()" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-refresh"></span>  Zurücksetzen</button>
       </div>
     </div>
     <div class="col-sm-6">
       <div class="text-center">
         <label for="kommentar_text">Klinischer Verlauf (automatisch generiert)</label>
       </div>
+      <div id="kommentar_fehler" style="display:none" class="alert alert-danger">
+        <span class="glyphicon glyphicon-info-sign"></span> Da nicht alle Plfichtfelder ausgefüllt wurden, konnte das Kommentar nicht aktualisiert werden. Die erforderlichen Angaben wurden rot markiert.
+      </div>
       <div id="kommentar_generiert" style="width:100%">
         <textarea rows="5" style="width:100%" id="kommentar_text" name="kommentar_text" type="text">
         </textarea>
       </div>
-      <p style="color:red; display:none" id="kommentar_fehler">Da nicht alle Plfichtfelder ausgefüllt wurden, konnte das Kommentar nicht aktualisiert werden. Die erforderlichen Angaben wurden rot markiert.</p>
     </div>
     <div class="col-sm-3">
       <div class="text-center">

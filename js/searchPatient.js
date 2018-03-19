@@ -70,6 +70,7 @@ $(document).ready(function(){
     //Einfärben der gewählten Zeile
     $(this).css("background-color","#cccccc");
     //Daten des gewählten Patienten an globale Variable übergeben
+    formular_eingabe_reset();
     selectedPatientID = this.id.slice(3);
     selectedPatientGe = this.cells[3].innerHTML;
     document.getElementById('id_patient_t').value=selectedPatientID;

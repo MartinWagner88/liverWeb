@@ -30,11 +30,9 @@ $('document').ready(function() {
 			},
 			success : function(response){
 				if(response ==="ok"){
-					console.log('richtig');
 					$("#login_button").html('<img src="bilder/ajax-loader.gif" /> &nbsp; Signing In ...');
 					setTimeout(' window.location.href = "main.php"; ',2000);
 				} else {
-					console.log("falsch");
 					$("#error").fadeIn(1000, function(){
 						$("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+' Das Passwort ist für diesen Benutzer nicht g&uumlltig!</div>');
 						$("#login_button").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In');
