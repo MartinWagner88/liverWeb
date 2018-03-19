@@ -22,9 +22,12 @@ if(!isset($_SESSION['user_session'])){
 		<link rel="stylesheet" href="css/master.css">
     <!--Java-Script-Dateien -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="js/ton.js"></script>
 
   </head>
-  <body>
+  <body onload="ton('audio/login.mp3')">
+
+
 
 	<!--Daten einlesen-->
 	<?php
@@ -62,7 +65,7 @@ if(!isset($_SESSION['user_session'])){
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $nutzer['titel']." ".substr($nutzer['vorname'],0,1).". ".$nutzer['nachname'] ?> <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="logout.php">Log-Out</a></li>
+            <li><a  href="logout.php">Log-Out</a></li>
           </ul>
         </li>
 			<!-- Link to Glyphicon-Homepage as a thank you for the free glyphicons -->
@@ -76,7 +79,7 @@ if(!isset($_SESSION['user_session'])){
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" onclick="formular_leer_neuerPatient()" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Neuen Patienten anlegen</h4>
         </div>
         <div class="modal-body">
@@ -91,7 +94,7 @@ if(!isset($_SESSION['user_session'])){
             </div>
             <div class="form-group">
               <label for="geburtsdatum">Geburtsdatum:</label>
-              <input type="date" class="form-control" id="geburtsdatum_m" name="geburtsdatum_m" min="1900-01-01" placeholder="Geburtsdatum">
+              <input type="date" class="form-control" id="geburtsdatum_m" name="geburtsdatum_m" min="1900-01-01">
             </div>
             <div class="form-group">
               <label for="geschlecht">Geschlecht:</label>
@@ -99,11 +102,14 @@ if(!isset($_SESSION['user_session'])){
               <label class="radio-inline"><input type="radio" id="geschlecht-m" name="geschlecht_m" value="m" checked>männlich</label>
               <label class="radio-inline"><input type="radio" id="geschlecht-w" name="geschlecht_m" value="w">weiblich</label>
             </div>
-            <button type="button" onclick="formular_ajax_neuerPatient()"class="btn btn-success btn-block " data-dismiss="modal">Bestätigen</button>
+						<div id="warnung_neuer_patient" style="display:none" class="alert alert-danger">
+							<span class="glyphicon glyphicon-info-sign"></span> Die Angaben sind nicht vollst&aumlndig!
+						</div>
+            <button type="button" onclick="formular_valid_neuerPatient()"class="btn btn-success btn-block ">Bestätigen</button>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Schließen</button>
+          <button type="button" class="btn btn-danger btn-block" onclick="formular_leer_neuerPatient()"data-dismiss="modal">Schließen</button>
         </div>
       </div>
     </div>
@@ -171,6 +177,7 @@ if(!isset($_SESSION['user_session'])){
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+	<script src="js/newPatient_speichern.js"></script>
 	<script src="js/searchPatient.js"></script>
 	<script src="js/diagramm_laden.js"></script>
 	<script src="js/verlauf_auto.js"></script>

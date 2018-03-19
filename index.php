@@ -19,7 +19,7 @@
 		<h2 class="form-login-heading">Anmeldung - LiverWeb</h2><hr />
 		<p class="form-login-heading">Ihr persönlicher Assistent für die Lebersprechstunde</p>
 		<div class="form-login-heading" id="error" style="display:none">
-		Test-Error</div>
+		</div>
 		<p>&nbsp;</p>
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Benutzername" name="benutzer_name" id="benutzer_name" />
