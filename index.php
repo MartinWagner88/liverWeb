@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <link href="css/style.css" rel="stylesheet" type="text/css" media="screen">
 <title></title>
+
 <!-- LogIn Bereich modifiziert nach: http://www.phpzag.com/ajax-login-script-with-php-and-jquery/-->
 
 </head>
@@ -18,6 +19,7 @@
 	<form class="form-login" method="post" id="login-form">
 		<h2 class="form-login-heading">Anmeldung - LiverWeb</h2><hr />
 		<p class="form-login-heading">Ihr persönlicher Assistent für die Lebersprechstunde</p>
+		<!-- Div für einen Fehler, der bei Eingabe falscher LogIn-Daten angezeigt wird. -->
 		<div class="form-login-heading" id="error" style="display:none">
 		</div>
 		<p>&nbsp;</p>
@@ -36,8 +38,6 @@
 		</div>
 	</form>
 </div>
-
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

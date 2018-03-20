@@ -6,9 +6,11 @@
 <title>Verlauf erstellen</title>
 </head>
 
+<!-- Dokument zum Erstellen eines Verlaufseintrags für einen Patienten inklusive
+Decision-Support für Hepatitis-Therapie sowie Einschätzung und Bewertung
+des Schweregrads der Leberzirrhose. -->
+
 <body>
-
-
 
 <form id="formular_verlauf"  method="post" class="form-group">
 
@@ -23,6 +25,9 @@
       <div class="">
         <label for="arzt">Arzt:</label>
       </div>
+      <!-- Die Information, welcher Arzt den Verlaufseintrag erstellt, wird automatisch
+      aus dem angemeldeten Nutzer abgeleitet. Die Information wird für spätere
+      Verwendung als "Hidden"-Eingabefeld gespeichert sowie sichtbar ausgegeben. -->
       <input type="hidden" name="arzt" id="arzt" value="<?php echo $nutzer['titel']." ".substr($nutzer['vorname'],0,1).". ".$nutzer['nachname'] ?>">
       <span><?php echo $nutzer['titel']." ".substr($nutzer['vorname'],0,1).". ".$nutzer['nachname'] ?></span>
     </div>
@@ -86,17 +91,22 @@
     </div>
   </div>
   <div class="row">
+    <!-- Im folgenden "Diagnosen"-Menü werden die jeweiligen Eingabefelder nur angezeigt,
+    wenn die Checkbox für die Diagnose aktiviert ist. Ebenso verhält es sich
+    mit den Buttons für Decision-Support und Information über Leberzirrhose -->
     <div class="well col-sm-12">
       <h4>Diagnosen</h4>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-3">
+      <!-- Für die Diagnose "Primär sklerosierende Cholangitis (PSC)" wird die Intensisität
+      des Juckreizes ("Pruritus") über eine visuelle Analogskale
+      (hier: Slider von 0 bis 10) abgefragt und das Ergebnis dynamisch als Text ausgegeben. -->
       <div class="">
         <label><input type="checkbox" onclick="darstellung()" name="psc_anzeige" id="psc_anzeige" value="j" /> PSC</label>
       </div>
       <div class="form-group" id="group_psc" style="display:none">
-        <!-- style="display:none" -->
         <div class="">
           <label id="slidecontainerLabel" for="slidecontainer">Intensität des Pruritus: (?/10):</label>
         </div>
@@ -106,6 +116,11 @@
       </div>
     </div>
     <div class="col-sm-3">
+      <!-- Für die Diagnose Hepatitis B werden der Laborwert Glutamat-Pyruvat-Transaminase
+      ("GPT" gemessen in Units/Liter, Parameter der Leberzellschädigung),
+      sowie die Viruslast (gemessen in Units/Liter) abgefragt. Daraus wird -
+      geschlechtsspezifisch - die Empfehlung zur antiviralen Therapie gemäß S3-Leitlinie
+      als "Decision-Support" visualisiert. -->
       <div class="">
         <label><input type="checkbox" onclick="darstellung()" name="hepB_anzeige" id="hepB_anzeige" value="j" /> Hepatitis B</label>
       </div>
@@ -127,6 +142,10 @@
       </div>
     </div>
     <div class="col-sm-6">
+      <!-- Für Leberzirrhose wird der umfangreichste Teil der notwendigen Eingaben benötigt,
+      da verschiedene klinische (zB Blutungen, Hirnschäden) oder laborchemische Parameter
+      (zB Albumin, Kreatinin) die zu berechnenden Scores MELD (Model of Endstage Liver Disease)
+      und Child-Pugh (Stadium der Leberzirrhose) beeinflussen. -->
       <div class="text-center">
         <label><input type="checkbox" onclick="darstellung()" name="leZi_anzeige" id="leZi_anzeige" value="j" /> Leberzirrhose</label>
       </div>
@@ -143,7 +162,6 @@
               <label class="radio-inline"><input type="radio" name="blutung" value="b"> H&auml;matemesis und Teerstuhl</label>
               <label class="radio-inline"><input type="radio" name="blutung" value="s"> sonstige Blutung</label>
             </div>
-
             <div class="form-group">
               <div class="">
                 <label for="hepEnz">Hepatische Enzephalopathie: </label>
@@ -163,9 +181,9 @@
             <div class="form-group">
               <div class="">
                 <label for="dialyse">Dialyse:</label>
+                <!-- Beispielhaftes Popover zur Erläuterung der genauen Definition
+                (Häufigkeit in Zeitraum), wann dieses Feld auf "ja" gesetzt wird. -->
                 <a data-toggle="popover" title="" data-content="Wurde der Patient in der letzten Woche mindestens zweimal dialysiert?"><span class="glyphicon glyphicon-question-sign"></span></a>
-                <!-- <a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a> -->
-
               </div>
               <label><input type="radio"  name="dialyse" value="0" checked="checked"/> nein</label>
               <label><input type="radio" name="dialyse" value="1"/> ja</label>
@@ -199,16 +217,16 @@
               <input type="number" min="0" max="30" step="0.1" id="krea" name="krea"/>
               <label for="krea">mg/dl</label>
             </div>
-
-
           </div>
         </div>
-      </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="well">
+    <!-- In diesem Abschnitt befinden sich Buttons (links) und Textfeld (Mitte) für den automatisch
+    generierten Kommentar und dessen Absenden in die Datenbank, sowie die beschriebenen
+    Felder für Decision-Support in der Hepatitis-Therapie und Einschätzung der Leberzirrhose. -->
+    <div class="well col-sm-12">
       <h4>Ergebnis</h4>
     </div>
   </div>
@@ -239,6 +257,9 @@
       <div class="text-center">
         <label for="">Klinische Ergebnisse</label>
       </div>
+      <!-- Die Buttons für Decision-Support und Leberzirrhose sind standardmäßig zwar sichtbar,
+      aber disabled. Wenn die betreffende Krankheit gewählt wurde, werden die jeweiligen
+      Buttons drückbar, erzeugen ein erläuterndes Pop-Up-Fenster ("Modal") und werden je nach Werten eingefärbt. -->
       <button type="button" id="button_empfehlung"class="btn btn-basic btn-block disabled" data-toggle="modal" style="">Hepatitis-Therapie</button>
       <button type="button" id="child_e" name="child_e" class="btn btn-basic btn-block disabled" data-toggle="modal" style=""> Child-Pugh </button>
       <button type="button" id="meld_e" name="meld_e" class="btn btn-basic btn-block disabled" data-toggle="modal" style=""> MELD </button>
@@ -254,6 +275,7 @@
 
 </form>
 
+<!-- Modal zur Bestätigung der erfolgreichen Speicherung eines Verlaufseintrags. -->
 <div id="speicherung_erfolgreich_modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -268,6 +290,9 @@
   </div>
 </div>
 
+<!-- Modal zur Erläuterung der Therapieempfehlung auf Basis des Therapiealgorithmus
+zur antiviralen Therapie bei Hepatitis B nach S3-Leitlinie der Deutschen Gesellschaft
+für Verdauungs- und Stoffwechselkrankheiten e.V.  -->
 <div id="antivirale_therapie_modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -290,6 +315,7 @@
   </div>
 </div>
 
+<!-- Modal zur Erläuterung Child-Pugh-Score und Risikoabschätzung je nach Stadium -->
 <div id="child_modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -313,6 +339,8 @@
   </div>
 </div>
 
+<!-- Modal zur Erläuterung des MELD-Score und je nach errechnet Wert Angabe einer
+(im Rahmen statistischer Abschätzbarkeit) patientenindividuellen Prognose -->
 <div id="meld_modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -322,7 +350,9 @@
         <div class="container">
             <img class="img-responsive img-rounded " src="pictures/meld.jpg" alt="abc">
         </div>
+        <!-- Prognose-Paragraph, der je nach Eingabe patientenindividuell generiert wird. -->
         <p id="meld_modal_p"></p>
+        <!-- Generischer Paragraph zur Erläuterung des MELD-Score -->
         <p>Je höher der Punktwert, umso niedriger ist die Wahrscheinlichkeit des Patienten,
           die nächsten 3 Monate ohne Lebertransplantation zu überleben.
           Die Abbildung zeigt die geschätzte Überlebenswahrscheinlichkeit bei verschiedenen MELD Werten (Quelle:

@@ -2,11 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<title>Unbenanntes Dokument</title>
+<title>Verlauf gesamt</title>
 </head>
 
+	<!-- PHP-Datei für die Hauptfunktionalität "Verlauf", die eine Übersicht über
+	sämtliche Verlaufseinträge eines Patienten gibt. -->
+	
 <body>
-
+	<!-- Initial leeres Html-Element, in das zur Laufzeit die jeweils abgerufenen
+	Verlaufseinträge geschrieben werden. -->
 	<div id="verlauf_container">
 	</div>
 
