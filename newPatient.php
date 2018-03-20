@@ -19,10 +19,7 @@ function test_input($data) {
 }
 
 //Spezifikation der Datenbankanbindung
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "liverweb";
+include_once("db_connect.php");
 
 //Aufbauen der Datenbankverbindung und Schreiben der Informationen
 //über den neuen Patienten in die Stammdatentabelle.
