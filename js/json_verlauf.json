@@ -1,12 +1,12 @@
 [
 	{"geschlecht":{
-		"w":"Die Patientin ", 
+		"w":"Die Patientin ",
 		"m":"Der Patient "
 		}
-	}, 
+	},
 	{"pruritus":{
 		"p0": "verneint das Vorliegen von Pruritus. ",
-		"p1": "berichtet von Pruritus (Intensität:  " 
+		"p1": "berichtet von Pruritus (Intensität:  "
 		}
 	},
 	{"allgemeinzustand":{
