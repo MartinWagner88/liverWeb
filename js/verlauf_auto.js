@@ -165,7 +165,7 @@ function kommentar_generieren(){
 
 
 	// Generation des Kommentar-Textes
-	var ergebnisString = geschlecht_j+" befindet sich in einem "+az_j+". Das aktuelle Körpergewicht beträgt "+kg_v+" kg und ist somit "+gewVer_v+". ";
+	var ergebnisString = geschlecht_j+"befindet sich in einem "+az_j+". Das aktuelle Körpergewicht beträgt "+kg_v+" kg und ist somit "+gewVer_v+". ";
 	if(document.getElementById('psc_anzeige').checked===true){
 		ergebnisString+=geschlecht_j+pruritus_j;
 		if (pruritus_k==="p1"){ergebnisString+="("+pruritus_v.toString()+"/10)). "};

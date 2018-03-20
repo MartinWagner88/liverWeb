@@ -33,7 +33,7 @@ function updatePatTableBody(){
       }
     }
   };
-  xhttp.open("POST","php/searchPatients.php",true);
+  xhttp.open("POST","searchPatients.php",true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send(formData);
 }

@@ -1,5 +1,6 @@
+//Script für login modifiziert nach: http://www.phpzag.com/ajax-login-script-with-php-and-jquery
 $('document').ready(function() {
-	/* handling form validation */
+//Prüfung der Logineingaben
 	$("#login-form").validate({
 		rules: {
 			benutzer_passwort: {
@@ -17,7 +18,7 @@ $('document').ready(function() {
 		},
 		submitHandler: submitForm
 	});
-	/* Handling login functionality */
+	//Gibt Daten an login.php zur Prüfung auf gültigen Benutzer/Passwort-Kombination weiter
 	function submitForm() {
 		var data = $("#login-form").serialize();
 		$.ajax({
@@ -26,11 +27,11 @@ $('document').ready(function() {
 			data : data,
 			beforeSend: function(){
 				$("#error").fadeOut();
-				$("#login_button").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; sending ...');
+				$("#login_button").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; Senden...');
 			},
 			success : function(response){
 				if(response ==="ok"){
-					$("#login_button").html('<img src="bilder/ajax-loader.gif" /> &nbsp; Signing In ...');
+					$("#login_button").html('<img src="pictures/ajax-loader.gif" /> &nbsp; Einloggen...');
 					setTimeout(' window.location.href = "main.php"; ',2000);
 				} else {
 					$("#error").fadeIn(1000, function(){
