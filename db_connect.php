@@ -1,6 +1,5 @@
 <?php
-
-/* Database connection local data*/
+/* Datenbankverbindung für lokale Datenhaltung. Einzubinden in andere Dateien für bessere Wartbarkeit*/
 $servername = "localhost";
 $username = "root";
 $password = "";

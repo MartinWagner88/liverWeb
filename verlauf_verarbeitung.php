@@ -16,9 +16,6 @@ if(!isset($_SESSION['user_session'])){
 
 <?php
 
-//$nachname=$_POST["nachname"];
-//$vorname=$_POST["vorname"];
-
 //Übergabe der Variablen von AJAX
 $arzt=$_POST["arzt"];
 $kommentar=$_POST["kommentar_text"];
@@ -34,30 +31,15 @@ $child=$_POST["child_t"];
 $meld=$_POST["meld_t"];
 $id_stammdaten=$_POST["id_patient_t"];
 
-
-//auslesen der aktuellenZeit und Datum
+//Auslesen der aktuellen Zeit und Datum
 $zeit = new DateTime();
 $datum = $zeit->format('Y-m-d H:i:s');
 
-//Datenbankzugriff
+//Generischer Datenbankzugriff
 include_once("db_connect.php");
 
 $verbindung = mysqli_connect($servername, $username, $password , $dbname)
 or die ("Fehler im System!");
-
-
-/*
-$auslesen_id="SELECT idstammdaten  FROM stammdaten WHERE nachname='$nachname' AND vorname='$vorname'";
-
-if($stmt=mysqli_prepare($verbindung, $auslesen_id)){
-mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $id_stammdaten);
-while (mysqli_stmt_fetch($stmt)){
-	}
-mysqli_stmt_close($stmt);
-}
-
-*/
 
 //Eintragen der Daten in die Datenbank
 $einfuegen_bericht="INSERT INTO bericht (datum, arzt, kommentar, stammdaten_idstammdaten) VALUES ('$datum','$arzt', '$kommentar','$id_stammdaten')";
@@ -77,16 +59,17 @@ $pdo = new PDO('mysql:host=localhost;dbname=liverweb', 'root', '');
 $sql = "SELECT datum, kommentar, arzt FROM bericht WHERE stammdaten_idstammdaten='$id_stammdaten' ORDER BY datum DESC";
 
 ?>
+
+<!-- Aufbau einer Tabelle für die Anzeige der Verlaufsberichte. -->
 <div class="container">
-
 <div class="panel-group" id='accordion'>
-
 
 <?php
 $zahl_panel=0;
 
 foreach ($pdo->query($sql) as $row) {
 	$zahl_panel++;
+	//Aufsplitten der Teilinformationen des Datums in Teilvariablen.
 	$datum=strtok($row['datum'], " ");
 	$uhrzeit=strtok("");
 	$jahr=strtok($datum,"-");
@@ -95,6 +78,8 @@ foreach ($pdo->query($sql) as $row) {
 	$stunden=strtok($uhrzeit, ":");
 	$minuten=strtok(":");
 
+	//Anwendungsspezifisches Zusammensetzen der Teilvariablen des Datums und ausgeben
+  //gemeinsam mit dem Arztnamen und dem Kommentar.
 	echo "<div class='panel panel-default'>";
 	echo "<div class='panel-heading'>";
 	echo "<h3 class='panel-title'>";
@@ -105,10 +90,6 @@ foreach ($pdo->query($sql) as $row) {
 	echo "</div></div></div>";
 
 }
-
-
-
-
 
 ?>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
