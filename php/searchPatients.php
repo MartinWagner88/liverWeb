@@ -1,12 +1,15 @@
 <?php
-// Datenbankanbindung nach https://www.w3schools.com/php/php_mysql_select.asp
+//php-Datei zum Suchen von Patienten in der Datenbank
 
+//Übernehmen der Formularinhalte, wenn diese gesetzt wurden und
+//Testen der Eingaben zur Vermeidung von Hacker-Angriffen wie Cross-site scripting (XSS)
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
   if(isset($_POST["nachname"])){$nachname = test_input($_POST["nachname"]);}
   if(isset($_POST["vorname"])){$vorname = test_input($_POST["vorname"]);}
   if(isset($_POST["geburtsdatum"])){$geburtsdatum = test_input($_POST["geburtsdatum"]);}
 }
 
+//Methode zum Testen der Eingaben übernommen von https://www.w3schools.com/php/php_form_validation.asp
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -14,21 +17,23 @@ function test_input($data) {
   return $data;
 }
 
+//Spezifikation der Datenbankanbindung
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "liverweb";
 
+// Datenbankanbindung nach https://www.w3schools.com/php/php_mysql_select.asp
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    //Rohe SQL-Abfrage ohne Einschränkungen
+    //SQL-Abfrage ohne Berücksichtigung der eingegebenen Suchparameter.
     $sql = "SELECT idstammdaten, nachname, vorname, geburtsdatum, geschlecht  FROM stammdaten";
 
-    //SQL-Abfrage erweitern um Einschränkungen, wenn die Felder im Formular gesetzt sind.
-
+    //Erweitern der SQL-Abfrage um Einschränkungen, wenn die jeweiligen Felder
+    //im Formular gesetzt sind. Durch die Nutzung von "LIKE" funktioniert die Suche
+    //auch bei nur teilweiser Eingabe der Namen.
     $firstSqlExtension = TRUE;
     if(!empty($nachname)){
       $sql .= " WHERE (nachname LIKE '$nachname%'";
@@ -57,31 +62,26 @@ try {
     }
 
     $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        // for($x=0; $x < count($stmt); $x++){
-        //   echo $x. "<br> asd";
-        // }
-        // set the resulting array to associative
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $counter=TRUE;
-        //echo "<form> <br>";
-        foreach($stmt->fetchAll() as $value){
-        //foreach($result as $x->$y){
-          echo "<tr id=tr_".$value["idstammdaten"].">
-                  <td>".$value["nachname"]."</td>
-                  <td>".$value["vorname"]."</td>
-                  <td>".$value["geburtsdatum"]."</td>
-                  <td>".$value["geschlecht"]."</td>
-                </tr>
-          ";
-        //echo "</form>";
-        }
-     }
-     catch(PDOException $e)
-     {
-     echo $sql . "<br>" . $e->getMessage();
+      $stmt->execute();
+      // Setzen des herausgesuchten Arrays auf "associative"
+      $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+      $counter=TRUE;
+      foreach($stmt->fetchAll() as $value){
+      //Erzeugen einer Tabellenzeile je Patient, wobei die ID des Zeilenelements
+      //immer die Stammdaten-ID enthält, was für die Verknüpfung der Patiententabelle
+      //mit den Hauptfunktionalitäten genutzt wird.
+        echo "<tr id=tr_".$value["idstammdaten"].">
+                <td>".$value["nachname"]."</td>
+                <td>".$value["vorname"]."</td>
+                <td>".$value["geburtsdatum"]."</td>
+                <td>".$value["geschlecht"]."</td>
+              </tr>
+        ";
       }
-
-// $conn = null;
+  }
+  catch(PDOException $e){
+    // Beim Auftreten einer Ausnahme Ausgabe des SQL-Statements und des Fehlers.
+    echo $sql . "<br>" . $e->getMessage();
+  }
 
 ?>

@@ -1,5 +1,7 @@
 @charset = "utf-8";
 
+
+/* Einfärben der Schrift in den Tabs der unteren Nachbar entsprechend der oberen Navbar */
 .navbar-inverse a {
     color: rgba(255,255,255,0.5);
 };

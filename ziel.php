@@ -12,7 +12,8 @@
 
 <?php
 
-
+//Übernehmen der Patienten- und Arztinformation sowie des Kommentars zur Übertragung
+//in die Datenbank.
 $nachname=$_POST["nachname"];
 $vorname=$_POST["vorname"];
 $arzt=$_POST["arzt"];
@@ -21,12 +22,11 @@ $text=$_POST["freitext"];
 $zeit = new DateTime();
 $datum = $zeit->format('Y-m-d H:i:s');
 
-
-
-
-$verbindung = mysqli_connect("localhost", "root", "" ,"liverweb") 
+//Datenbankverbindung
+$verbindung = mysqli_connect("localhost", "root", "" ,"liverweb")
 or die ("Fehler im System!");
 
+//Auslesen der relevanten Daten
 $auslesen_id="SELECT idstammdaten  FROM stammdaten WHERE nachname='$nachname' AND vorname='$vorname'";
 
 if($stmt=mysqli_prepare($verbindung, $auslesen_id)){
@@ -37,23 +37,27 @@ while (mysqli_stmt_fetch($stmt)){
 mysqli_stmt_close($stmt);
 }
 
-
+//Einfügen des Berichts und Arztinformationen in die Datenbanktabelle zum
+//entsprechenden Patienten.
 $einfuegen="INSERT INTO bericht (datum, arzt, kommentar, stammdaten_idstammdaten) VALUES ('$datum','$arzt', '$text','$idstammdaten')";
 $einfuegen_ausfuehren=mysqli_query($verbindung, $einfuegen) or die(" keine Übertragung in die Datenbank!");
 
 mysqli_close($verbindung);
 
 
+//Aufbauen der Datenbankverbindung zum Abrufen der Kommentare für den gesamten Verlauf
 $pdo = new PDO('mysql:host=localhost;dbname=liverweb', 'root', '');
 
+//Abrufen aller Berichte für den gewählten Patienten
 $sql = "SELECT datum, kommentar, arzt FROM bericht WHERE stammdaten_idstammdaten='$idstammdaten'";
 
-?> 
+?>
 <div class="container">
 <table = class="table table-hover table-bordered">
 
 <?php
 foreach ($pdo->query($sql) as $row) {
+  //Aufsplitten der Teilinformationen des Datums in Teilvariablen.
 	$datum=strtok($row['datum'], " ");
 	$uhrzeit=strtok("");
 	$jahr=strtok($datum,"-");
@@ -61,8 +65,10 @@ foreach ($pdo->query($sql) as $row) {
 	$tag=strtok("-");
 	$stunden=strtok($uhrzeit, ":");
 	$minuten=strtok(":");
-   echo "<div><h3>".$tag.".".$monat.".".$jahr.", ".$stunden.":".$minuten." &ndash; ".$row['arzt']."</h3><p>".$row['kommentar']."</p> </div>";
- 
+  //Anwendungsspezifisches Zusammensetzen der Teilvariablen des Datums und ausgeben
+  //gemeinsam mit dem Arztnamen und dem Kommentar.
+  echo "<div><h3>".$tag.".".$monat.".".$jahr.", ".$stunden.":".$minuten." &ndash; ".$row['arzt']."</h3><p>".$row['kommentar']."</p> </div>";
+
 }
 ?>
 

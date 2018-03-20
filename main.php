@@ -25,12 +25,15 @@ if(!isset($_SESSION['user_session'])){
 		<script src="js/ton.js"></script>
 
   </head>
+
+	<!-- Begrüßungston beim LogIn. -->
   <body onload="ton('audio/login.mp3')">
 
 
 
-	<!--Daten einlesen-->
+	<!--Daten über Nutzer einlesen-->
 	<?php
+	// Generischer Datenbankzugriff
 	include_once("db_connect.php");
 	$conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
 
@@ -39,13 +42,13 @@ if(!isset($_SESSION['user_session'])){
 	$nutzer = mysqli_fetch_assoc($resultset);
 	?>
 
-  <!--Main Navigation Bar-->
+  <!--Hauptnavigationsleiste mit Software-Brand, Patientensuchleiste, Nutzername und Logout-Feld-->
   <nav id="mainNavbar" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">LiverWeb</a>
       </div>
-		<!-- Inline Form to search for or add Patients.  -->
+		<!-- Formular zur Suche oder Neueingabe von Patienten  -->
 		<form class="navbar-form navbar-left">
 				<div class="form-group">
 		      <input type="text" class="form-control" id="nachname" name="nachname" placeholder="Nachname">
@@ -53,28 +56,33 @@ if(!isset($_SESSION['user_session'])){
 			    <label for="geburtsdatum" style="color:rgba(255, 255, 255, 0.5);"> Geburtsdatum:</label>
 		      <input type="date" class="form-control" id="geburtsdatum" name="geburtsdatum" min="1900-01-01" placeholder="Geburtsdatum">
 		    </div>
+				<!-- Absenden der Suchanfrage -->
 		    <button id="patsuchsubmit" type="button" onclick="updatePatTableBody()" class="btn btn-default">
 						<span class="glyphicon glyphicon-search"></span>
 				</button>
+				<!-- Zurücksetzen der Suchanfrage -->
 		    <button id="patReset" type="reset" class="btn btn-default ">
 					<span class="glyphicon glyphicon-remove"></span>
-			</button>
-		    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#newPatientModal">Neuer Patient</button>
+				</button>
+				<!-- Öffnen des Modal "newPatientModal" zum Anlegen eines neues Patienten -->
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#newPatientModal">Neuer Patient</button>
 			</form>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
+					<!-- Anzeige des Benutzernamen und Titel-->
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $nutzer['titel']." ".substr($nutzer['vorname'],0,1).". ".$nutzer['nachname'] ?> <span class="caret"></span></a>
           <ul class="dropdown-menu">
+						<!-- Möglichkeit zum Log-Out -->
             <li><a  href="logout.php">Log-Out</a></li>
           </ul>
         </li>
-			<!-- Link to Glyphicon-Homepage as a thank you for the free glyphicons -->
+			<!-- "Easter-Egg" - Link zur Glyphicon-Homepage als Dank für das freie Bereitstellen der Glyphicons im Rahmen von Bootstrap -->
       <a target="_blank" href="http://glyphicons.com/" class="navbar-text glyphicon glyphicon-glass"></a>
       </ul>
     </div>
   </nav>
 
-  <!-- Modal newPatientModal-->
+  <!-- newPatientModal zum Anlegen neuer Patienten-->
   <div id="newPatientModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -102,6 +110,7 @@ if(!isset($_SESSION['user_session'])){
               <label class="radio-inline"><input type="radio" id="geschlecht-m" name="geschlecht_m" value="m" checked>männlich</label>
               <label class="radio-inline"><input type="radio" id="geschlecht-w" name="geschlecht_m" value="w">weiblich</label>
             </div>
+						<!-- Warnung anzuzeigen, falls die eingegebenen Daten unvollständig sind. -->
 						<div id="warnung_neuer_patient" style="display:none" class="alert alert-danger">
 							<span class="glyphicon glyphicon-info-sign"></span> Die Angaben sind nicht vollst&aumlndig!
 						</div>
@@ -115,24 +124,35 @@ if(!isset($_SESSION['user_session'])){
     </div>
   </div>
 
+	<!-- Patiententabelle - je nach Suchanfrage in der Kopfnavigation dynamisch erzeugte
+	Tabelle der gesuchten Patienten, die zeilenweise auswählbar sind und über diese Auswahl
+	mit den verschiedenen Funktionalitäten (Verlaufseintrag, Verlauf und Labor) verbunden sind. -->
 	<div id="patTableContainer" class="container-fluid" style="margin-top:55px">
+		<!-- Fehlermeldung, falls kein entsprechender Patient gefunden wurde. -->
 		<div id="noPatientError" class="container" style="display:none">
 			<div class="alert alert-danger text-center">
 			<strong>Achtung!</strong> Kein Patient mit den angegebenen Merkmalen gefunden.
 			</div>
 		</div>
+		<!-- Fehlermeldung, falls eine der Funktionalitäten gewählt wurde, ohne zuvor einen Patienten auszuwählen -->
 		<div id="verlaufNoPatient" class="container" style="display:none">
 			<div class="alert alert-danger text-center">
 			<strong>Achtung!</strong> Es wurde kein Patient ausgewählt!.
 			</div>
 		</div>
+		<!-- Fehlermeldung, falls die Funktionalität "Verlaufseintrag" für einen Patienten gewählt wurde,
+		für den kein solcher existiert. -->
 		<div id="keinEintrag" class="container" style="display:none">
 			<div class="alert alert-danger text-center">
 			<strong>Achtung!</strong> Für diesen Patienten existiert kein Verlaufseintrag!.
 			</div>
 		</div>
+		<!-- Patiententabelle -->
 	  <div id="patTableDiv" class="table-responsive" style="width:95%;margin: 0 auto;display:none">
 	    <table id="patTable" class="table table-hover">
+				<!-- Der Tabellenkopf wird dem Nutzer immer angezeigt, um als optischer Anker
+				dem neuen Nutzer einen Hinweis auf das erwartete Ergebnis der Patientensuche
+				zu geben. -->
 	      <thead>
 	        <tr>
 	          <th>Nachname</th>
@@ -141,21 +161,28 @@ if(!isset($_SESSION['user_session'])){
 	          <th>Geschlecht</th>
 	        </tr>
 	      </thead>
+				<!-- Der Tabellenkörper ist primär leer, wird aber nach Patientensuche ohne
+				Neuladen der Seite mittels Ajax aktualisiert. -->
 	      <tbody id="patTable_Body">
 	      </tbody>
 	    </table>
 	  </div>
 	</div>
 
-
+<!-- Funktionalitäten - Die untere Navigationsleiste erlaub die Auswahl der drei
+Hauptfunktionalitäten von Liverweb:
+(1) Eingabe klinischer Daten und automatischen Generieren eines Verlaufseintrags,
+(2) Anzeige der vorhandenen Verlaufseinträge
+(3) Anzeige der Verläufe von wichtigen Laborwerten als Diagramm -->
 <div id="lowerNavbarContainer" class="container-fluid"></div>
-
  <ul class="nav nav-tabs nav-justified navbar-inverse">
    <li><a id="Verlaufseintrag-Nav" data-toggle="tab" href="#Verlaufseintrag-Tab"><span class="glyphicon glyphicon-list-alt"></span> Verlaufseintrag</a></li>
 	 <li><a id="Verlauf-Nav" data-toggle="tab" href="#Verlauf-Tab"><span class="glyphicon glyphicon-th-list"></span> Verlauf</a></li>
    <li><a id="Labor-Nav" data-toggle="tab" href="#Labor-Tab"><span class="glyphicon glyphicon-stats"></span> Labor</a></li>
  </ul>
  <div class="tab-content">
+	 <!-- Die einzelnen Tabs werden der Übersichtlichkeit halbe als separate php-Dateien
+	 gespeichert und inkludiert. -->
    <div id="Verlaufseintrag-Tab" class="tab-pane fade" style="display:inline">
 		 <?php
 		 include "eingabe.php";
