@@ -1,3 +1,4 @@
+//Diese Funktion initiert eine AJAX Abfrage zur Darstellung der Übersicht der Verläufe des ausgewählten Patienten.
 	function verlauf_laden_funktion(selPatID, verlaufGetestet){
 			if (verlaufGetestet){
 				var PatIDTrans='patient='+selPatID;
@@ -8,9 +9,9 @@
           	if (!this.response){
 	            $("#patTableDiv").css("display","none");
 	            $("#noPatientError").css("display","inline");
-							console.log("no response to verlauf laden");
+
 	          } else {
-	          //alert(this.response);
+	          //Anzeigen der Veräufe in folgendem Ordner
 	          document.getElementById('verlauf_container').innerHTML = this.responseText;
 	          }
 	        }
@@ -20,22 +21,3 @@
 	      xhttp.send(PatIDTrans);
 			};
 	};
-
-/*
-var jahre = [result.length];
-var monate = [result.length];
-var tage = [result.length];
-var stunden = [result.length];
-var minuten = [result.length];
-var kommentare = [result.length];
-var arzt = [result.length];
-
-for(i=0; i<result.length;i++){
-  jahre[i]=result[i][0];
-  monate[i]=result[i][1];
-  tage[i]=result[i][2];
-  stunden[i]=result[i][3];
-  minuten[i]=result[i][4];
-  kommentare[i]=result[i][5];
-  arzt[i]=result[i][6];
-*/
