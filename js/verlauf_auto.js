@@ -1,3 +1,4 @@
+//Ein- und Ausblenden von optionalen Eingabefeldern des Eingabe-Formulars für den Verlauf
 function darstellung(){
 	var diagnosenGruppenArray = ['group_psc', 'group_hepatitis_B', 'group_leZi'];
 	var diagnosenCheckboxArray = ['psc_anzeige','hepB_anzeige','leZi_anzeige'];
@@ -22,7 +23,7 @@ function darstellung(){
 		};
 	}
 }
-
+//Anpassung der Info-Buttons im Eingabe-Formular in Abhängigkeit vom Ergebnis
 function disableBtn(button,text){
 	button.classList.add("disabled","btn-basic");
 	button.classList.remove("btn-success","btn-danger","btn-warning");
@@ -47,28 +48,23 @@ function dangBtn(button){
 	button.classList.remove("disabled","btn-success","btn-basic","btn-warning");
 	reDefineModal(button);
 }
-
+//Ansteuerung des korrekten Modal nach Ancklicken des entsprechenden Info-Buttons
 function reDefineModal(button){
-	console.log("Input für reDefineModal: " + button);
-	console.log("Input für switch: " + button.id);
 	switch (button.id) {
 		case "button_empfehlung":
 			button.dataset.target='#antivirale_therapie_modal';
-			console.log("empf; " + button.dataset.target);
 			break;
 		case "child_e":
 			button.dataset.target='#child_modal';
-			console.log("child: " + button.dataset.target);
 			break;
 		case "meld_e":
 			button.dataset.target='#meld_modal';
-			console.log("meld_e; " + button.dataset.target);
 			break;
 		default: return "";
 
 	}
 }
-
+//Formular-Validierung bei Eingabe-Formular; Pflichtfelder in Abhängigkeit von den gewählten Krankheiten
 function formular_validierung(){
 
 	var validationOk = true;
@@ -100,6 +96,7 @@ document.getElementById('kommentar_fehler').style.display='block'};
 
 }
 
+//Färbt leere Felder rot; bei befüllten Feldern wird der Hintergrudn wieder weiß gefärbt
 function feld_leer(id){
 	var validationResult=true;
 	if(document.getElementById(id).value===""){
@@ -108,30 +105,25 @@ function feld_leer(id){
 	}else{
 	document.getElementById(id).style.backgroundColor='#FFFFFF' ;
 	}
-
 	return validationResult;
 }
 
+//JSON für Textbausteine per AJAX abgefragt
 function kommentar_generieren(){
-
-
 	 var abfrage = new XMLHttpRequest();
 	   abfrage.open("POST", "js/json_verlauf.json", true);
-
   abfrage.onreadystatechange = function() {
     if (abfrage.readyState == 4 && this.status==200) {
 		var verlauf = JSON.parse(abfrage.responseText);
+		// übergibt JSON an Funktion zur Generierung des Auto-Kommentars
 		kommentar_ausfuehren(verlauf);
-
     }
   }
   abfrage.send(null);
 }
-
+//Erstellung des Auto-Kommentars - Übergabe der erforderlichen Variablen
   function kommentar_ausfuehren(verlauf){
 	var geschlecht_v = selectedPatientGe;
-	//alert (typeof(selectedPatientGe));
-	//var geschlecht_v =getValue_radioButton('geschlecht');
 	var az_v =getValue_radioButton('az');
 	var pruritus_v = document.getElementById('pruritus').value;
 	if (pruritus_v == 0){var pruritus_k="p0"}else{var pruritus_k="p1"};
@@ -164,8 +156,8 @@ function kommentar_generieren(){
 	var wieVorZahl_v=document.getElementById('wieVorZahl').value;
 
 
-	// Generation des Kommentar-Textes
-	var ergebnisString = geschlecht_j+"befindet sich in einem "+az_j+". Das aktuelle Körpergewicht beträgt "+kg_v+" kg und ist somit "+gewVer_v+". ";
+	// Generierung des Kommentar-Textes
+	var ergebnisString = geschlecht_j+"befindet sich in "+az_j+". Das aktuelle Körpergewicht beträgt "+kg_v+" kg und ist somit "+gewVer_v+". ";
 	if(document.getElementById('psc_anzeige').checked===true){
 		ergebnisString+=geschlecht_j+pruritus_j;
 		if (pruritus_k==="p1"){ergebnisString+="("+pruritus_v.toString()+"/10)). "};
@@ -205,10 +197,7 @@ if(document.getElementById('hepB_anzeige').checked===true){
 document.getElementById('button_empfehlung').style.display='block';
 }
 
-
-
-
-
+//Hilfsfunktion u.a. zur Berechnung des ChildPugh Scores
 function getValue_radioButton(kriterium){
 	var kriterium=document.getElementsByName(kriterium);
 	for (var i =0; i< kriterium.length; i++){
@@ -218,7 +207,7 @@ function getValue_radioButton(kriterium){
 
 	}	return 'leer';
 }
-
+//Hilfsfunktion zur Berechnung des ChildPugh Scores (Leberfunktion)
 function berechne_childPugh(){
 	var albumin_v=document.getElementById('albumin').value;
 	var bili_v=document.getElementById('bili').value;
@@ -268,7 +257,7 @@ function berechne_childPugh(){
 	return childPughScore;
 
 }
-
+//Hilfsfunktion zur Berechnung des MELD-Scores (Leberfunktion)
 function berechne_meld(){
 	var bili_v=parseFloat(document.getElementById('bili').value);
 	var inr_v=parseFloat(document.getElementById('inr').value);
@@ -286,7 +275,6 @@ function berechne_meld(){
 	var risikoHoehe;
 	var risikoLetal;
 if (document.getElementById('leZi_anzeige').checked===true){
-	console.log("LeZi_checked " + meld_score);
 	document.getElementById('meld_e').innerHTML=meld_score_text;
 	if (meld_score<20){
 		succBtn(document.getElementById('meld_e'));
@@ -306,12 +294,10 @@ if (document.getElementById('leZi_anzeige').checked===true){
 	document.getElementById("meld_modal_p").innerHTML="Dieser Patient hat ein " + risikoHoehe + " Risiko. " +
 																					"Im Falle eines Krankenhausaufenthalts liegt die Wahrscheinlichkeit, innerhalb der nächsten 3 Monate zu versterben, bei " +
 																					risikoLetal +" Prozent (Quelle: <a target='_blank' href='https:/"+"/www.ncbi.nlm.nih.gov/pubmed/12512033'/><span class='glyphicon glyphicon-link'></span></a>).";
-	console.log(document.getElementById("meld_modal_p").innerHTML);
+
 }
 
 	document.getElementById('meld_t').value=meld_score;
 
 	return meld_score;
 }
-
-//Aktivieren der Buttons je nachdem, ob die Krankheiten ausgewählt sind
