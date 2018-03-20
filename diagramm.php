@@ -16,7 +16,7 @@
     <a href="#" class="btn btn-default" id="hbvButton"  onClick="activateDiagramButton(this.id)">  HBV-DNA</a>
 </div>
 
-<div style="width:50%; height: 50%">
+<div style="width:70%; padding-left: 15%">
 <canvas id="Diagramm"></canvas>
 </div>
 
