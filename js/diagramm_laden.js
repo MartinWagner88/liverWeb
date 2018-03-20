@@ -1,24 +1,31 @@
+
+// Laden eines Diagramm je nach spezifiziertem Parameter und Patienten
 function diagramm_laden_funktion(labor_parameter, selectedPatientID){
 
+         //Abfrage der Daten mittels Ajax aus der Datenbank
          $.ajax({
               type: 'POST',
               url: 'diagramm_db.php',
               data: {parameter: labor_parameter, patient: selectedPatientID},
               dataType: 'json',
               success: function(result) {
+                //Übertragen der Daten in zwei Array für x- und y-Achse
                 var zeitenDiagramm = [result.length];
                 var datenDiagramm = [result.length];
                 for(i=0; i<result.length;i++){
                   zeitenDiagramm[i]=result[i][0];
                   datenDiagramm[i]=result[i][1];
                 }
+                //Aufruf der Funktion, die das eigentliche Diagramm zeichnet
                 diagramm_anzeigen_funktion(zeitenDiagramm, datenDiagramm, labor_parameter);
               }
           });
 }
 
+//Zeichnen eines Diagramms aus zwei Arrays für x- und y-Achse sowie abzubildendem Parameter
 function diagramm_anzeigen_funktion(zeitenDiagramm, datenDiagramm, labor_parameter){
 
+  //Titel des Diagramms
   switch(labor_parameter) {
       case 'meld': var beschriftungDiagramm ='MELD Score';
           break;
@@ -32,6 +39,7 @@ function diagramm_anzeigen_funktion(zeitenDiagramm, datenDiagramm, labor_paramet
           var beschriftungDiagramm ='Wert im Verlauf';
   }
 
+  //Erzeugen des Diagramms mit der chart.js-Libraby
   const CHART =document.getElementById("Diagramm");
 
   let pruritusDiagramm = new Chart(CHART, {
@@ -48,11 +56,15 @@ function diagramm_anzeigen_funktion(zeitenDiagramm, datenDiagramm, labor_paramet
           }
     });
 
+  //Herunterscrollen beim Zeichnen des Diagramms, damit direkt das gesamte Diagramm
+  //sichtbar ist.
   $('html, body').animate({scrollTop: $(document).height()}, 0);
-  console.log("Heruntergescrollt!" + Date.now());
 
 }
 
+//Methode zum Aktivieren der Diagramm-Buttons: Optisches Aktivieren  mit der
+//"active"-Klasse von Bootstrap, entfernen dieser Klasse bei allen anderen Buttons
+//und Laden des entsprechnden Diagramms.
 function activateDiagramButton(button){
   $("#meldButton,#pruritusButton,#gptButton,#hbvButton").removeClass("active");
   $('#' + button).addClass("active");

@@ -155,7 +155,6 @@ function kommentar_generieren(){
 	var wieVorEinheit_e=wieVorEinheit_id.options[wieVorEinheit_id.selectedIndex].text;
 	var wieVorZahl_v=document.getElementById('wieVorZahl').value;
 
-
 	// Generierung des Kommentar-Textes
 	var ergebnisString = geschlecht_j+"befindet sich in "+az_j+". Das aktuelle Körpergewicht beträgt "+kg_v+" kg und ist somit "+gewVer_v+". ";
 	if(document.getElementById('psc_anzeige').checked===true){
