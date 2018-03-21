@@ -1,6 +1,6 @@
 //Speicherung des neuen Patienten mittels AJAX
 function formular_ajax_neuerPatient(){
-    //Speichern der übergebenen Datne in einer Variable
+    //Speichern der übergebenen Daten in einer Variable
     var daten_neuerPatient = "nachname_m="+$('#nachname_m').val()+"&vorname_m="+$('#vorname_m').val()+"&geburtsdatum_m="+$('#geburtsdatum_m').val()+"&geschlecht_m="+$('input[name="geschlecht_m"]:checked').val();
     //Übergeben an php-Datei mittels AJAX
     $.ajax({
