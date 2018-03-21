@@ -212,6 +212,8 @@ Hauptfunktionalitäten von Liverweb:
 	<script src="js/verlauf_speichern.js"></script>
 	<script src="js/misc.js"></script>
 	<script src="js/verlauf_laden.js"></script>
+	<script src="js/patientDelete.js"></script>
+
 
 <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script> -->
 

@@ -75,6 +75,8 @@ try {
                 <td>".$value["vorname"]."</td>
                 <td>".$value["geburtsdatum"]."</td>
                 <td>".$value["geschlecht"]."</td>
+                <td><span id=delete_".$value["idstammdaten"]."_".$value["vorname"]."_".$value["nachname"]." class=\"glyphicon glyphicon-trash patientTrash\"></span></td>
+
               </tr>
         ";
       }
