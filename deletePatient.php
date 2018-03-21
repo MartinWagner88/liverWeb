@@ -24,11 +24,11 @@ include_once("db_connect.php");
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql1 = "DELETE FROM stammdaten WHERE idstammdaten='$id_stammdaten'";
-    $sql2 = "DELETE FROM bericht WHERE stammdaten_idstammdaten='$id_stammdaten'";
-    $sql3 = "DELETE FROM laborwerte WHERE stammdaten_idstammdaten='$id_stammdaten'";
-    $sql4 = "DELETE FROM leberfunktion WHERE stammdaten_idstammdaten='$id_stammdaten'";
-    $sql5 = "DELETE FROM pruritus WHERE stammdaten_idstammdaten='$id_stammdaten'";
+    $sql1 = "DELETE FROM bericht WHERE stammdaten_idstammdaten='$id_stammdaten'";
+    $sql2 = "DELETE FROM laborwerte WHERE stammdaten_idstammdaten='$id_stammdaten'";
+    $sql3 = "DELETE FROM leberfunktion WHERE stammdaten_idstammdaten='$id_stammdaten'";
+    $sql4 = "DELETE FROM pruritus WHERE stammdaten_idstammdaten='$id_stammdaten'";
+    $sql5 = "DELETE FROM stammdaten WHERE idstammdaten='$id_stammdaten'";
     //Nutzen von exec() weil keine Werte zurückgegeben werden
     $conn->exec($sql1);
     $conn->exec($sql2);
